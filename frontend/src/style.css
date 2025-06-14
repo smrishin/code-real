@@ -1,3 +1,5 @@
+@import "tailwindcss";
+
 :root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
@@ -25,7 +27,7 @@ a:hover {
 body {
   margin: 0;
   display: flex;
-  place-items: center;
+  /* place-items: center; */
   min-width: 320px;
   min-height: 100vh;
 }
@@ -58,11 +60,39 @@ button:focus-visible {
   padding: 2em;
 }
 
+h2 {
+  font-size: 1.2em;
+  font-weight: 500;
+  line-height: 1.1;
+}
+
+details {
+  cursor: pointer;
+}
+
+details::before {
+  content: "";
+  display: block;
+  height: 1em;
+}
+
+strong::before {
+  content: "";
+  display: block;
+  height: 2em;
+}
+
+strong::after {
+  content: "";
+  display: block;
+  height: 1em;
+}
+
 #app {
   max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+  /* margin: auto; */
+  /* padding: 2rem; */
+  /* text-align: center; */
 }
 
 @media (prefers-color-scheme: light) {

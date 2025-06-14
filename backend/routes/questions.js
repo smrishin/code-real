@@ -1,16 +1,39 @@
 "use strict";
 
-const questionsService = require("../services/questions");
+const {
+  getQuestionsRandom,
+  createQuestionsWithAI
+} = require("../services/questions");
 
 module.exports = {
   async getQuestions(req, res, next) {
     try {
-      const exlude_list = req.body?.exclude || [];
+      const exclude = req.query["exclude[]"];
+      const excludeList = Array.isArray(exclude)
+        ? exclude
+        : exclude
+        ? [exclude]
+        : [];
 
-      const questions = await questionsService.getQuestionsRandom(exlude_list);
+      const companyName = req.query.company || "Amazon";
 
-      return res.json(questions);
-    } catch (error) {
+      const selectedQuestions = await getQuestionsRandom(excludeList);
+
+      await Promise.allSettled(
+        selectedQuestions.map(async (q) => {
+          const raw = await createQuestionsWithAI(q, companyName);
+          const cleanedMarkdown = raw
+            .replace(/^```markdown\n/, "")
+            .replace(/```$/, "")
+            .replace(/\\n/g, "\n")
+            .replace(/\\"/g, '"');
+
+          q["question"] = cleanedMarkdown;
+        })
+      );
+
+      return res.json(selectedQuestions);
+    } catch (err) {
       console.error(`Error getting the questions: ${err}`);
       return res.status(400).json({
         error: err.message || "Failed to get questions"

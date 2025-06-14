@@ -12,7 +12,7 @@ yarn-error.log*
 
 # Backend (Node.js + Express)
 backend/node_modules/
-backend/.env
+backend/.env*
 backend/dist/
 backend/build/
 
@@ -26,7 +26,7 @@ frontend/.output/
 
 # Scripts (general)
 scripts/node_modules/
-scripts/.env
+scripts/.env*
 scripts/dist/
 scripts/build/
 scr
