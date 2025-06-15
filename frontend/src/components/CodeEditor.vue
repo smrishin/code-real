@@ -4,32 +4,53 @@
     language="python"
     theme="vs-dark"
     :options="options"
-    class="h-full"
+    class="py-4 h-full"
   />
 </template>
 
 <script setup>
-import { ref, onMounted } from "vue";
+import { ref, onMounted, computed, watch } from "vue";
 import { VueMonacoEditor } from "@guolao/vue-monaco-editor";
 
 const props = defineProps({
   initialCode: {
     type: String,
     default: 'print("Hello, world!")'
+  },
+  disabled: {
+    type: Boolean,
+    default: false
   }
 });
 
+const emit = defineEmits(["update:value"]);
+
 const code = ref(props.initialCode);
-const options = {
+
+// Watch for code changes and emit updates
+watch(code, (newValue) => {
+  emit("update:value", newValue);
+});
+
+// Watch for initialCode prop changes
+watch(
+  () => props.initialCode,
+  (newValue) => {
+    code.value = newValue;
+  }
+);
+
+const options = computed(() => ({
   automaticLayout: true,
   minimap: { enabled: false },
   formatOnType: true,
   formatOnPaste: true,
   tabSize: 4,
-  insertSpaces: true
-};
+  insertSpaces: true,
+  readOnly: props.disabled
+}));
 
-// Update code if initialCode prop changes
+// Initial setup
 onMounted(() => {
   code.value = props.initialCode;
 });
