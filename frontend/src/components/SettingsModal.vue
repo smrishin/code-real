@@ -1,6 +1,7 @@
 <script setup>
 import { useSettingsStore } from "../stores/settings";
 import { useTimerStore } from "../stores/timer";
+import { QUESTION_LIMIT } from "../constants/settings";
 import { onMounted, onUnmounted, ref, watch } from "vue";
 
 const props = defineProps({
@@ -110,7 +111,6 @@ onUnmounted(() => {
             v-model="settingsStore.company"
             class="w-full rounded-md border border-gray-600 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 bg-gray-800 text-gray-100"
           >
-            <option value="" disabled>Select a company</option>
             <option
               v-for="company in settingsStore.companies"
               :key="company"
@@ -149,13 +149,14 @@ onUnmounted(() => {
           <label class="block text-sm font-medium text-gray-100 mb-2">
             Number of Questions (max 3)
           </label>
-          <input
-            type="number"
+          <select
             v-model.number="settingsStore.questionCount"
-            min="1"
-            max="3"
             class="w-full rounded-md border border-gray-600 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 bg-gray-800 text-gray-100"
-          />
+          >
+            <option v-for="i in QUESTION_LIMIT" :key="i" :value="i">
+              {{ i }}
+            </option>
+          </select>
         </div>
 
         <!-- Time Limit -->

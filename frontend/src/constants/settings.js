@@ -6,6 +6,8 @@ export const DEFAULT_SETTINGS = {
   TIME_LIMIT: 30 // in minutes
 };
 
+export const QUESTION_LIMIT = 3;
+
 // Available Options
 export const COMPANIES = [
   "Google",
