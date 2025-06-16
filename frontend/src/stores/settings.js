@@ -10,7 +10,7 @@ import {
 export const useSettingsStore = defineStore("settings", () => {
   // Default values from constants
   const company = ref(DEFAULT_SETTINGS.COMPANY);
-  const difficulty = ref(DEFAULT_SETTINGS.DIFFICULTY);
+  const difficulty = ref([...DEFAULT_SETTINGS.DIFFICULTY]);
   const questionCount = ref(DEFAULT_SETTINGS.QUESTION_COUNT);
   const timeLimit = ref(DEFAULT_SETTINGS.TIME_LIMIT);
   const topics = ref([]);
@@ -35,7 +35,7 @@ export const useSettingsStore = defineStore("settings", () => {
 
   function resetSettings() {
     company.value = DEFAULT_SETTINGS.COMPANY;
-    difficulty.value = DEFAULT_SETTINGS.DIFFICULTY;
+    difficulty.value = [...DEFAULT_SETTINGS.DIFFICULTY];
     questionCount.value = DEFAULT_SETTINGS.QUESTION_COUNT;
     timeLimit.value = DEFAULT_SETTINGS.TIME_LIMIT;
     topics.value = [];

@@ -1,7 +1,6 @@
 <script setup>
 import { useSettingsStore } from "../stores/settings";
-import { useTimerStore } from "../stores/timer";
-import { QUESTION_LIMIT } from "../constants/settings";
+import { QUESTION_LIMIT, TIME_LIMITS } from "../constants/settings";
 import { onMounted, onUnmounted, ref, watch } from "vue";
 
 const props = defineProps({
@@ -14,17 +13,8 @@ const props = defineProps({
 const emit = defineEmits(["close"]);
 
 const settingsStore = useSettingsStore();
-const timerStore = useTimerStore();
 
-const timeLimits = [
-  { label: "5 seconds", value: 1 / 12 },
-  { label: "10 minutes", value: 10 },
-  { label: "15 minutes", value: 15 },
-  { label: "20 minutes", value: 20 },
-  { label: "30 minutes", value: 30 },
-  { label: "45 minutes", value: 45 },
-  { label: "60 minutes", value: 60 }
-];
+const timeLimits = TIME_LIMITS;
 
 const settings = ref({
   company: settingsStore.company,
@@ -77,7 +67,7 @@ onUnmounted(() => {
     @click="handleBackdropClick"
   >
     <div
-      class="bg-gray-900 rounded-lg shadow-xl w-[calc(100vw-12rem)] max-h-[90vh] overflow-y-auto"
+      class="bg-gray-900 rounded-lg shadow-xl w-[calc(100vw-30rem)] max-h-[90vh] overflow-y-auto"
       @click.stop
     >
       <!-- Header -->
@@ -127,7 +117,7 @@ onUnmounted(() => {
           <label class="block text-sm font-medium text-gray-100 mb-2">
             Difficulty
           </label>
-          <div class="space-y-2">
+          <div class="flex gap-4">
             <label
               v-for="level in settingsStore.difficultyLevels"
               :key="level"
@@ -137,7 +127,7 @@ onUnmounted(() => {
                 type="checkbox"
                 :value="level"
                 v-model="settingsStore.difficulty"
-                class="rounded border-gray-600 text-gray-900 focus:ring-blue-900"
+                class="rounded border-gray-600 text-blue-500 focus:ring-blue-500 bg-gray-700"
               />
               <span class="ml-2 text-gray-100">{{ level }}</span>
             </label>
@@ -147,7 +137,7 @@ onUnmounted(() => {
         <!-- Question Count -->
         <div>
           <label class="block text-sm font-medium text-gray-100 mb-2">
-            Number of Questions (max 3)
+            Number of Questions
           </label>
           <select
             v-model.number="settingsStore.questionCount"

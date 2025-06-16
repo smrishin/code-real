@@ -33,7 +33,7 @@ const toggleSettings = () => {
   <button
     @click="toggleSettings"
     :disabled="timerStore.isRunning"
-    class="w-full h-10 flex items-center justify-center bg-gray-700 transition-colors group"
+    class="w-full h-10 flex items-center justify-center bg-gray-700 transition-colors group border-none"
     :title="
       timerStore.isRunning
         ? 'Cannot change settings while timer is running'
@@ -41,7 +41,8 @@ const toggleSettings = () => {
     "
   >
     <div
-      class="text-white text-xl font-bold transition-transform duration-300 group-hover:rotate-90"
+      class="text-white text-xl font-bold transition-transform duration-300"
+      :class="{ 'group-hover:rotate-90': !timerStore.isRunning }"
     >
       ⚙️
     </div>
