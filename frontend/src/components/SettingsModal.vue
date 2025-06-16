@@ -1,7 +1,7 @@
 <script setup>
 import { useSettingsStore } from "../stores/settings";
 import { useTimerStore } from "../stores/timer";
-import { onMounted, onUnmounted } from "vue";
+import { onMounted, onUnmounted, ref, watch } from "vue";
 
 const props = defineProps({
   isOpen: {
@@ -16,14 +16,30 @@ const settingsStore = useSettingsStore();
 const timerStore = useTimerStore();
 
 const timeLimits = [
+  { label: "5 seconds", value: 1 / 12 },
   { label: "10 minutes", value: 10 },
   { label: "15 minutes", value: 15 },
   { label: "20 minutes", value: 20 },
   { label: "30 minutes", value: 30 },
-  { label: "40 minutes", value: 40 },
   { label: "45 minutes", value: 45 },
   { label: "60 minutes", value: 60 }
 ];
+
+const settings = ref({
+  company: settingsStore.company,
+  difficulty: settingsStore.difficulty,
+  questionCount: settingsStore.questionCount,
+  timeLimit: settingsStore.timeLimit
+});
+
+// Watch for settings changes
+watch(
+  () => settings.value,
+  (newSettings) => {
+    settingsStore.updateSettings(newSettings);
+  },
+  { deep: true }
+);
 
 const closeModal = () => {
   emit("close");
@@ -148,8 +164,7 @@ onUnmounted(() => {
             Time Limit
           </label>
           <select
-            v-model="timeLimits[1].value"
-            @change="timerStore.setTimeLimit($event.target.value)"
+            v-model="settingsStore.timeLimit"
             class="w-full rounded-md border border-gray-600 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 bg-gray-800 text-gray-100"
           >
             <option

@@ -3,6 +3,7 @@ import { marked } from "marked";
 import CodeEditor from "./components/CodeEditor.vue";
 import SettingsButton from "./components/SettingsButton.vue";
 import SettingsModal from "./components/SettingsModal.vue";
+import Timer from "./components/Timer.vue";
 import { onUnmounted, ref, watch } from "vue";
 import { useTimerStore } from "./stores/timer";
 import { useQuestionStore } from "./stores/question";
@@ -57,32 +58,8 @@ watch(
       <img src="/logo.png" class="h-10 p-2" alt="logo" />
     </div>
 
-    <div class="pr-4 flex items-center gap-4">
-      <span class="text-white font-mono text-xl">{{
-        timerStore.formattedTime
-      }}</span>
-      <div class="flex gap-2">
-        <button
-          @click="
-            timerStore.isRunning
-              ? timerStore.pauseTimer()
-              : timerStore.startTimer()
-          "
-          class="px-4 py-2 rounded bg-white text-blue-900 hover:bg-blue-100 transition-colors flex items-center gap-2"
-          :disabled="!timerStore.isPaused && timerStore.isTimeUp"
-        >
-          <span v-if="timerStore.isRunning">⏸️</span>
-          <span v-else-if="timerStore.isPaused">▶️</span>
-          <span v-else>▶️</span>
-        </button>
-        <button
-          @click="timerStore.resetTimer"
-          class="px-4 py-2 rounded bg-red-600 text-white hover:bg-red-700 transition-colors"
-          :disabled="!timerStore.isPaused && !timerStore.isTimeUp"
-        >
-          🔄
-        </button>
-      </div>
+    <div class="pr-4">
+      <Timer />
     </div>
   </div>
 
@@ -133,10 +110,5 @@ watch(
 }
 .logo.vue:hover {
   filter: drop-shadow(0 0 2em #42b883aa);
-}
-
-button:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
 }
 </style>

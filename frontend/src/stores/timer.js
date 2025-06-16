@@ -1,12 +1,26 @@
 import { defineStore } from "pinia";
-import { ref, computed } from "vue";
+import { ref, computed, watch } from "vue";
+import { useSettingsStore } from "./settings";
 
 export const useTimerStore = defineStore("timer", () => {
+  const settingsStore = useSettingsStore();
+
   // State
-  const timeLimit = ref(45 * 60); // 45 minutes in seconds
+  const timeLimit = ref(settingsStore.timeLimit * 60); // Convert minutes to seconds
   const timeRemaining = ref(timeLimit.value);
   const isRunning = ref(false);
   const isPaused = ref(false);
+
+  // Watch for settings changes
+  watch(
+    () => settingsStore.timeLimit,
+    (newTimeLimit) => {
+      timeLimit.value = newTimeLimit * 60;
+      if (!isRunning.value) {
+        timeRemaining.value = timeLimit.value;
+      }
+    }
+  );
 
   // Getters
   const formattedTime = computed(() => {
@@ -22,7 +36,7 @@ export const useTimerStore = defineStore("timer", () => {
   // Actions
   let timerInterval = null;
 
-  function startTimer() {
+  const startTimer = () => {
     if (!isRunning.value && !isPaused.value) {
       timeRemaining.value = timeLimit.value;
     }
@@ -33,29 +47,32 @@ export const useTimerStore = defineStore("timer", () => {
       if (timeRemaining.value > 0) {
         timeRemaining.value--;
       } else {
-        stopTimer();
-        alert("Time is up!");
+        clearInterval(timerInterval);
+        isRunning.value = false;
+        isPaused.value = false;
       }
     }, 1000);
-  }
+  };
 
-  function pauseTimer() {
+  const pauseTimer = () => {
     clearInterval(timerInterval);
     isRunning.value = false;
     isPaused.value = true;
-  }
+  };
 
-  function resetTimer() {
+  const resetTimer = () => {
     clearInterval(timerInterval);
-    timeRemaining.value = timeLimit.value;
     isRunning.value = false;
     isPaused.value = false;
-  }
+    timeRemaining.value = timeLimit.value;
+  };
 
-  function setTimeLimit(minutes) {
+  const setTimeLimit = (minutes) => {
     timeLimit.value = minutes * 60;
-    resetTimer();
-  }
+    if (!isRunning.value) {
+      timeRemaining.value = timeLimit.value;
+    }
+  };
 
   // Cleanup
   function cleanup() {
