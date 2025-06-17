@@ -1,10 +1,10 @@
 <script setup>
-import { marked } from "marked";
 import CodeEditor from "./components/CodeEditor.vue";
 import SettingsButton from "./components/SettingsButton.vue";
 import SettingsModal from "./components/SettingsModal.vue";
 import QuestionsButton from "./components/QuestionsButton.vue";
 import Timer from "./components/Timer.vue";
+import Question from "./components/Question.vue";
 import { onUnmounted, ref, watch, computed } from "vue";
 import { useTimerStore } from "./stores/timer";
 import { useQuestionStore } from "./stores/question";
@@ -86,26 +86,27 @@ watch(
     <!-- Settings Modal -->
     <SettingsModal :is-open="isSettingsOpen" @close="toggleSettings(false)" />
 
-    <!-- Left Pane -->
+    <!-- Question Pane -->
     <div class="w-1/2 overflow-auto border-r border-gray-300">
-      <!-- top right difficulty -->
-      <!-- at the end, question name and topic, tags if exist -->
-      <!-- bottom right -->
-      <!-- leetcode link -->
-      <!-- solution link -->
-      <template v-if="currentQuestion">
-        <!-- Question Content -->
-        <div class="p-4">
-          <div v-html="currentQuestion.questionHTML" class="prose max-w-none" />
+      <Question v-if="currentQuestion" :question="currentQuestion" />
+
+      <div v-else class="flex justify-center gap-10 pt-20">
+        <QuestionsButton />
+        <div class="w-10">
+          <SettingsButton
+            :is-modal-open="isSettingsOpen"
+            @toggle-settings="toggleSettings"
+          />
         </div>
-      </template>
+      </div>
     </div>
 
-    <!-- Right Pane -->
+    <!-- Code Editor Pane -->
     <div class="w-1/2 h-[calc(100vh-2.5rem)] overflow-auto">
       <CodeEditor
         :initial-code="questionStore.getCurrentCode()"
         :disabled="questionStore.isEditorDisabled"
+        :leetcode-link="currentQuestion?.leetcodeLink || ''"
         @update:value="questionStore.updateCode"
       />
     </div>

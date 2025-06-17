@@ -1,8 +1,8 @@
 // Default Settings
 export const DEFAULT_SETTINGS = {
-  COMPANY: "Google",
-  DIFFICULTY: ["Easy"],
-  QUESTION_COUNT: 2,
+  COMPANY: "Amazon",
+  DIFFICULTY: ["Medium"],
+  QUESTION_COUNT: 1,
   TIME_LIMIT: 30, // in minutes
   TOPICS: [
     "Arrays & Hashing",
@@ -21,7 +21,7 @@ export const DEFAULT_SETTINGS = {
   ]
 };
 
-export const QUESTION_LIMIT = 1; // max 3
+export const QUESTION_LIMIT = 2; // max 3
 
 export const TIME_LIMITS = [
   { label: "5 seconds (Testing only)", value: 1 / 12 },

@@ -14,11 +14,9 @@ export const useQuestionStore = defineStore("question", () => {
       ...q,
       initialCode: q.initialCode || ""
     }));
-    // Initialize user codes for all questions
+    // Always use the new initial code for each question
     newQuestions.forEach((q) => {
-      if (!userCodes.value[q.id]) {
-        userCodes.value[q.id] = q.initialCode || "";
-      }
+      userCodes.value[q.id] = q.initialCode || "";
     });
     // Set the first question as current if available
     if (newQuestions.length > 0 && currentQuestionIndex.value === null) {
