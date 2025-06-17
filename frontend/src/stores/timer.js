@@ -9,7 +9,6 @@ export const useTimerStore = defineStore("timer", () => {
   const timeLimit = ref(settingsStore.timeLimit * 60); // Convert minutes to seconds
   const timeRemaining = ref(timeLimit.value);
   const isRunning = ref(false);
-  const isPaused = ref(false);
 
   // Watch for settings changes
   watch(
@@ -37,11 +36,10 @@ export const useTimerStore = defineStore("timer", () => {
   let timerInterval = null;
 
   const startTimer = () => {
-    if (!isRunning.value && !isPaused.value) {
+    if (!isRunning.value) {
       timeRemaining.value = timeLimit.value;
     }
     isRunning.value = true;
-    isPaused.value = false;
 
     timerInterval = setInterval(() => {
       if (timeRemaining.value > 0) {
@@ -49,7 +47,6 @@ export const useTimerStore = defineStore("timer", () => {
       } else {
         clearInterval(timerInterval);
         isRunning.value = false;
-        isPaused.value = false;
       }
     }, 1000);
   };
@@ -57,13 +54,11 @@ export const useTimerStore = defineStore("timer", () => {
   const pauseTimer = () => {
     clearInterval(timerInterval);
     isRunning.value = false;
-    isPaused.value = true;
   };
 
   const resetTimer = () => {
     clearInterval(timerInterval);
     isRunning.value = false;
-    isPaused.value = false;
     timeRemaining.value = timeLimit.value;
   };
 
@@ -86,7 +81,6 @@ export const useTimerStore = defineStore("timer", () => {
     timeLimit,
     timeRemaining,
     isRunning,
-    isPaused,
     // Getters
     formattedTime,
     isTimeUp,

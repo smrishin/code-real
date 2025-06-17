@@ -7,6 +7,6 @@ router.get("/status", async (req, res) => {
   return res.json("SUCCESS");
 });
 
-router.get("/questions", require("./questions").getQuestions);
+router.post("/questions", require("./questions").getQuestions);
 
 module.exports = router;

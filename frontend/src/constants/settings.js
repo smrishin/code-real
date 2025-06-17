@@ -1,9 +1,24 @@
 // Default Settings
 export const DEFAULT_SETTINGS = {
-  COMPANY: "Amazon",
-  DIFFICULTY: ["Medium"],
-  QUESTION_COUNT: 1,
-  TIME_LIMIT: 30 // in minutes
+  COMPANY: "Google",
+  DIFFICULTY: ["Easy"],
+  QUESTION_COUNT: 2,
+  TIME_LIMIT: 30, // in minutes
+  TOPICS: [
+    "Arrays & Hashing",
+    "Two Pointers",
+    "Sliding Window",
+    "Stack",
+    "Binary Search",
+    "Linked List",
+    "Trees",
+    "Heap / Priority Queue",
+    "Backtracking",
+    "Tries",
+    "Graphs",
+    "1-D Dynamic Programming",
+    "2-D Dynamic Programming"
+  ]
 };
 
 export const QUESTION_LIMIT = 1; // max 3
@@ -33,19 +48,22 @@ export const COMPANIES = [
 export const DIFFICULTY_LEVELS = ["Easy", "Medium", "Hard"];
 
 export const AVAILABLE_TOPICS = [
-  "Arrays",
-  "Strings",
-  "Linked Lists",
-  "Trees",
-  "Graphs",
-  "Dynamic Programming",
-  "Backtracking",
-  "Greedy",
-  "Binary Search",
-  "Heap",
+  "Arrays & Hashing",
+  "Two Pointers",
+  "Sliding Window",
   "Stack",
-  "Queue",
-  "Hash Table",
-  "Sorting",
+  "Binary Search",
+  "Linked List",
+  "Trees",
+  "Heap / Priority Queue",
+  "Backtracking",
+  "Tries",
+  "Graphs",
+  "Advanced Graphs",
+  "1-D Dynamic Programming",
+  "2-D Dynamic Programming",
+  "Greedy",
+  "Intervals",
+  "Math & Geometry",
   "Bit Manipulation"
 ];

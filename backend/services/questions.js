@@ -2,24 +2,18 @@
 
 const gemini = require("../helpers/gemini");
 
-const getQuestionsRandom = async (excludeList) => {
+const getQuestionsRandom = async (noOfQuestions, difficulty, topics) => {
   try {
-    return require("../data/questions.json").slice(0, 2);
-    const allQuestions = require("../data/questions.json").filter(
-      (q) => !excludeList.includes(q.topic)
+    const filteredQuestions = require("../data/questions.json").filter(
+      (q) =>
+        (difficulty && difficulty.length > 0
+          ? difficulty.includes(q.difficulty)
+          : true) &&
+        (topics && topics.length > 0 ? topics.includes(q.topic) : true)
     );
-    const nothard = allQuestions.filter((q) => q.difficulty !== "Hard");
-    const hard = allQuestions.filter((q) => q.difficulty === "Hard");
 
-    if (hard.length > 0 && Math.random() < 0.5) {
-      // Pick one hard question
-      const idx = Math.floor(Math.random() * hard.length);
-      return [hard[idx]];
-    } else {
-      // Pick two easy/medium questions
-      const shuffled = nothard.sort(() => 0.5 - Math.random());
-      return shuffled.slice(0, 2);
-    }
+    const shuffled = filteredQuestions.sort(() => 0.5 - Math.random());
+    return shuffled.slice(0, noOfQuestions);
   } catch (err) {
     throw new Error(err);
   }
@@ -53,7 +47,41 @@ const createQuestionsWithAI = async (selectedQuestion, companyName) => {
 
     Point 5 and 6 from the above list should be dropdowns
 
-    Please present the output clearly in a markdown format avoiding unnecessary tabs, separating each section with appropriate headings.
+    Please present the output clearly in a html format as shown below, separating each section with appropriate headings.
+    Format an interview-style coding question in HTML for a frontend display system.
+    Use the following structure and ensure the output is strictly HTML and markdown-style code blocks.
+
+    Topic: Fraud detection in digital payments
+
+    Fill in the template as follows:
+
+    Wrap the full output in HTML tags like <h2>, <p>, <ul>, <pre><code>, etc.
+
+    Title: inside <h2>, e.g., "Google Software Engineer Interview Question: Identifying Fraudulent Transactions"
+
+    Have heading for each section below something like <p><strong>Problem Statement:</strong></p>
+
+    heading should be Problem Statement, Function Signature, Examples, Constraints, Detailed Explanation, Explicit Constraints & Complexity Expectations
+
+    Problem description in <p> tags. 
+
+    Function signature inside a Python code block using <pre><code class="language-python">.
+
+    Examples inside <pre><code>, with both Input and Output, and include a small comment on the output.
+
+    Constraints as <ul><li>...</li></ul>
+
+    Add two <details> blocks:
+
+    One titled "Detailed Explanation" (must include edge cases, assumptions, and production considerations)
+
+    One titled "Explicit Constraints & Complexity Expectations" (include input size, types, time/space complexity goals)
+
+    Avoid using any additional explanation or markdown outside of proper HTML tags.
+
+    Output must start directly with the <h2> tag and not include any extra text.
+
+    
     `;
 
     const response = await gemini.generateContent(prompt);

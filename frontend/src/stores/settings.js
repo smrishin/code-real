@@ -13,7 +13,7 @@ export const useSettingsStore = defineStore("settings", () => {
   const difficulty = ref([...DEFAULT_SETTINGS.DIFFICULTY]);
   const questionCount = ref(DEFAULT_SETTINGS.QUESTION_COUNT);
   const timeLimit = ref(DEFAULT_SETTINGS.TIME_LIMIT);
-  const topics = ref([]);
+  const topics = ref([...DEFAULT_SETTINGS.TOPICS]);
 
   // Available options from constants
   const companies = COMPANIES;
@@ -38,7 +38,7 @@ export const useSettingsStore = defineStore("settings", () => {
     difficulty.value = [...DEFAULT_SETTINGS.DIFFICULTY];
     questionCount.value = DEFAULT_SETTINGS.QUESTION_COUNT;
     timeLimit.value = DEFAULT_SETTINGS.TIME_LIMIT;
-    topics.value = [];
+    topics.value = [...DEFAULT_SETTINGS.TOPICS];
   }
 
   return {
