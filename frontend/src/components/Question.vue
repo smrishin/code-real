@@ -56,6 +56,11 @@
           />
         </svg>
       </button>
+      <span
+        class="px-3 py-1 text-sm font-medium text-white bg-gray-700 rounded-md"
+      >
+        {{ question.topic }}
+      </span>
     </div>
   </div>
 </template>
