@@ -71,9 +71,9 @@ watch(
           v-for="(question, index) in questionStore.questions"
           :key="index"
           :class="[
-            'rounded text-center transition-colors',
+            'text-center transition-colors',
             questionStore.currentQuestionIndex === index
-              ? 'bg-blue-900 text-white'
+              ? 'bg-blue-800 text-white'
               : 'bg-gray-700 hover:bg-gray-600 text-gray-200'
           ]"
           @click="questionStore.setCurrentQuestionIndex(index)"

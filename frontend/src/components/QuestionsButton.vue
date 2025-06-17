@@ -2,7 +2,7 @@
 <template>
   <div>
     <button
-      class="px-4 py-2 rounded text-white bg-blue-700 hover:bg-blue-800 transition-colors flex items-center gap-2 drop-shadow-[0_0_10px_rgba(239,68,68,0.5)]"
+      class="px-4 py-2 rounded-lg text-white bg-blue-700 hover:bg-blue-800 transition-colors flex items-center gap-2 drop-shadow-[0_0_10px_rgba(239,68,68,0.5)]"
       @click="getQuestions"
       :disabled="isLoading"
     >
