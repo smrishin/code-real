@@ -4,9 +4,11 @@ import SettingsButton from "./SettingsButton.vue";
 </script>
 
 <template>
-  <div class="prose max-w-none flex flex-col gap-10 px-10 py-6">
+  <div
+    class="max-w-none flex flex-col gap-10 px-12 py-14 lg:mx-8 mx-2 my-6 bg-[#272727] border-2 border-[#373737] rounded-lg"
+  >
     <div class="flex flex-col gap-4 text-gray-400">
-      <h2 class="text-2xl font-bold text-blue-600">What is it?</h2>
+      <h2 class="text-2xl font-bold text-blue-600 text-center">What is it?</h2>
       <p class="text-md">
         This is a mock coding interview tool, build by a developer who got tired
         of solving algorithm problems that felt more like math puzzles than
@@ -19,8 +21,10 @@ import SettingsButton from "./SettingsButton.vue";
       </p>
     </div>
 
-    <div class="flex flex-col gap-2 text-gray-400">
-      <h2 class="text-2xl font-bold text-amber-500">How it works</h2>
+    <div class="flex flex-col gap-4 text-gray-400">
+      <h2 class="text-2xl font-bold text-amber-500 text-center">
+        How it works
+      </h2>
       <ul class="list-disc list-inside text-md">
         <li>
           Hit Start Mock — you get a company-style question and the timer starts
@@ -37,13 +41,13 @@ import SettingsButton from "./SettingsButton.vue";
         </li>
       </ul>
     </div>
-  </div>
 
-  <div class="flex justify-center gap-5">
-    <StartMockButton />
+    <div class="flex justify-center gap-6">
+      <StartMockButton />
 
-    <div class="flex justify-center items-center">
-      <SettingsButton toopTipPlacement="top-right" />
+      <div class="flex justify-center items-center">
+        <SettingsButton toopTipPlacement="top-right" />
+      </div>
     </div>
   </div>
 
@@ -62,4 +66,18 @@ import SettingsButton from "./SettingsButton.vue";
   </div>
 </template>
 
-<style scoped></style>
+<style scoped>
+p {
+  line-height: 1.75em;
+}
+
+li {
+  line-height: 1.5em;
+}
+
+li::after {
+  content: "";
+  display: block;
+  height: 0.5em;
+}
+</style>

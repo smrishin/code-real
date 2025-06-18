@@ -18,7 +18,7 @@ const toggleContact = () => {
 </script>
 
 <template>
-  <Tooltip text="Contact Us" :placement="toopTipPlacement">
+  <Tooltip text="Contact" :placement="toopTipPlacement">
     <button
       @click="toggleContact"
       class="w-full flex items-center justify-center text-blue-500 hover:text-red-400 transition-colors border-none"
