@@ -16,10 +16,10 @@ const timerStore = useTimerStore();
 
 <template>
   <div
-    class="flex items-center rounded-md px-3 w-fit hover:bg-blue-800"
+    class="flex items-center rounded-lg px-3 h-10 w-fit hover:bg-blue-800"
     :class="{
       'bg-blue-800': viewTimer,
-      'bg-blue-900': !viewTimer
+      'bg-blue-900 border border-blue-700': !viewTimer
     }"
   >
     <!-- timer display -->

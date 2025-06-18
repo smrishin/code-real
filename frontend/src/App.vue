@@ -1,23 +1,17 @@
 <script setup>
 import CodeEditor from "./components/CodeEditor.vue";
-import SideBarLeft from "./components/SideBarLeft.vue";
+// import SideBarLeft from "./components/SideBarLeft.vue";
 import Landing from "./components/Landing.vue";
-import Timer from "./components/Timer.vue";
 import Question from "./components/Question.vue";
+import Header from "./components/Header.vue";
+import SettingsModal from "./components/SettingsModal.vue";
+import ContactModal from "./components/ContactModal.vue";
 import { onUnmounted, watch, computed } from "vue";
 import { useTimerStore } from "./stores/timer";
 import { useQuestionStore } from "./stores/question";
-import { CodeBracketIcon } from "@heroicons/vue/24/outline";
 
 const timerStore = useTimerStore();
 const questionStore = useQuestionStore();
-
-const resetMock = () => {
-  if (confirm("Are you sure you want to reset the mock?")) {
-    questionStore.resetQuestions();
-    timerStore.resetTimer();
-  }
-};
 
 // Computed properties for current question
 const currentQuestion = computed(() => questionStore.getCurrentQuestion());
@@ -37,36 +31,18 @@ watch(
 </script>
 
 <template>
-  <header
-    class="z-10 flex justify-between items-center w-screen h-[3.5rem] bg-blue-900"
-  >
-    <!-- Logo -->
-    <div class="pl-4">
-      <CodeBracketIcon class="w-10 h-10 text-amber-500" />
-    </div>
+  <!-- Header -->
+  <Header />
 
-    <!-- Reset Mock Button -->
-    <div class="flex items-center gap-2">
-      <div v-if="questionStore.questions.length > 0" class="pr-4">
-        <button
-          class="px-4 py-2 rounded-lg text-white bg-blue-700 hover:bg-blue-800 border border-red-700/20 transition-colors flex items-center gap-2 capitalize"
-          @click="resetMock"
-          :disabled="questionStore.questions.length === 0"
-        >
-          Reset Mock
-        </button>
-      </div>
+  <!-- Settings Modal -->
+  <SettingsModal />
 
-      <!-- Timer -->
-      <div class="pr-4">
-        <Timer />
-      </div>
-    </div>
-  </header>
+  <!-- Contact Modal -->
+  <ContactModal />
 
   <div class="flex w-screen h-[calc(100vh-3.5rem)] overflow-hidden">
     <!-- Left sidebar -->
-    <SideBarLeft />
+    <!-- <SideBarLeft /> -->
 
     <!-- Question Pane -->
     <div class="w-1/2 overflow-auto border-r border-gray-700">

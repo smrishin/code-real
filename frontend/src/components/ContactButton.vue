@@ -5,13 +5,20 @@ import Tooltip from "./Tooltip.vue";
 
 const modalStore = useModalStore();
 
+const props = defineProps({
+  toopTipPlacement: {
+    type: String,
+    default: "bottom-right"
+  }
+});
+
 const toggleContact = () => {
   modalStore.toggleContact();
 };
 </script>
 
 <template>
-  <Tooltip text="Contact Us" placement="right">
+  <Tooltip text="Contact Us" :placement="toopTipPlacement">
     <button
       @click="toggleContact"
       class="w-full flex items-center justify-center text-blue-500 hover:text-red-400 transition-colors border-none"
