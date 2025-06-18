@@ -1,6 +1,4 @@
 <script setup>
-import SettingsModal from "./SettingsModal.vue";
-import ContactModal from "./ContactModal.vue";
 import SettingsButton from "./SettingsButton.vue";
 import ContactButton from "./ContactButton.vue";
 import { useQuestionStore } from "../stores/question";
@@ -9,12 +7,6 @@ const questionStore = useQuestionStore();
 </script>
 
 <template>
-  <!-- Settings Modal -->
-  <SettingsModal />
-
-  <!-- Contact Modal -->
-  <ContactModal />
-
   <div class="flex flex-col justify-between w-10 pt-2 pb-6 bg-gray-700 gap-2">
     <div class="flex flex-col">
       <SettingsButton class="py-4" toopTipPlacement="right" />
