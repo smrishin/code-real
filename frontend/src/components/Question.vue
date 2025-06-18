@@ -1,7 +1,7 @@
 <template>
   <div v-if="question" class="relative h-full">
     <div
-      class="fixed bottom-8 right-1/2 -translate-x-1/4 py-1 px-4 text-sm text-gray-500 backdrop-blur-sm backdrop-brightness-80 rounded-lg"
+      class="fixed bottom-5 right-1/2 -translate-x-1/4 py-1 px-4 text-sm text-gray-500 backdrop-blur-sm backdrop-brightness-80 rounded-lg"
       :class="{
         'text-green-500': question.difficulty === 'Easy',
         'text-yellow-500': question.difficulty === 'Medium',
