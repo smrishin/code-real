@@ -36,9 +36,6 @@ export const useTimerStore = defineStore("timer", () => {
   let timerInterval = null;
 
   const startTimer = () => {
-    if (!isRunning.value) {
-      timeRemaining.value = timeLimit.value;
-    }
     isRunning.value = true;
 
     timerInterval = setInterval(() => {

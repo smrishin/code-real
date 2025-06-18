@@ -1,18 +1,12 @@
 <script setup>
 import { useSettingsStore } from "../stores/settings";
+import { useModalStore } from "../stores/modal";
 import { QUESTION_LIMIT, TIME_LIMITS } from "../constants/settings";
 import { onMounted, onUnmounted, ref, watch } from "vue";
-
-const props = defineProps({
-  isOpen: {
-    type: Boolean,
-    required: true
-  }
-});
-
-const emit = defineEmits(["close"]);
+import { XMarkIcon } from "@heroicons/vue/24/outline";
 
 const settingsStore = useSettingsStore();
+const modalStore = useModalStore();
 
 const timeLimits = TIME_LIMITS;
 
@@ -33,7 +27,7 @@ watch(
 );
 
 const closeModal = () => {
-  emit("close");
+  modalStore.closeSettings();
 };
 
 // Close modal when clicking outside
@@ -45,7 +39,7 @@ const handleBackdropClick = (event) => {
 
 // Handle escape key
 const handleEscape = (event) => {
-  if (event.key === "Escape" && props.isOpen) {
+  if (event.key === "Escape" && modalStore.isSettingsOpen) {
     closeModal();
   }
 };
@@ -62,7 +56,7 @@ onUnmounted(() => {
 
 <template>
   <div
-    v-if="isOpen"
+    v-if="modalStore.isSettingsOpen"
     class="fixed inset-0 backdrop-blur-[10px] flex items-center justify-center z-50"
     @click="handleBackdropClick"
   >
@@ -74,19 +68,7 @@ onUnmounted(() => {
       <div class="px-6 py-4 flex justify-between items-center">
         <h2 class="text-xl font-semibold text-gray-100">Settings</h2>
         <button @click="closeModal" class="text-gray-400 hover:text-gray-500">
-          <svg
-            class="h-6 w-6"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M6 18L18 6M6 6l12 12"
-            />
-          </svg>
+          <XMarkIcon class="h-6 w-6" />
         </button>
       </div>
 

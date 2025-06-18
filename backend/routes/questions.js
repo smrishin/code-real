@@ -2,7 +2,8 @@
 
 const {
   getQuestionsRandom,
-  createQuestionsWithAI
+  createQuestionsWithAI,
+  validateInput
 } = require("../services/questions");
 
 module.exports = {
@@ -16,6 +17,8 @@ module.exports = {
           error: "Invalid secret code"
         });
       }
+
+      validateInput(req.body);
 
       const companyName = req.body.company || "Amazon";
       const noOfQuestions = req.body.noOfQuestions || 1;

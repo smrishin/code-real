@@ -24,10 +24,15 @@
     </Transition>
     <button
       @click="handleLeetCodeClick"
-      class="flex items-center gap-4 px-3 py-1 text-red-500 bg-transparent hover:bg-red-500/10 backdrop-blur-sm backdrop-brightness-80 rounded-md"
+      class="flex items-center gap-2 px-3 py-1 text-amber-500 bg-transparent hover:bg-amber-500/10 backdrop-blur-sm backdrop-brightness-80 rounded-md"
     >
-      Run on LeetCode
-      <img src="../assets/play.svg" alt="play" class="ml-2 w-4 h-4" />
+      <PlayIcon class="w-4 h-4" />
+      Run
+      <img
+        src="../assets/leetcode.png"
+        alt="LeetCode"
+        class="w-4 h-4 rounded-full mr-1"
+      />
     </button>
   </div>
 </template>
@@ -36,6 +41,7 @@
 import { ref, onMounted, computed, watch } from "vue";
 import { VueMonacoEditor } from "@guolao/vue-monaco-editor";
 import { openLink } from "../utils";
+import { PlayIcon } from "@heroicons/vue/24/outline";
 
 const props = defineProps({
   initialCode: {

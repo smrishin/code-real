@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@guolao/vue-monaco-editor": "^1.5.5",
+    "@heroicons/vue": "^2.2.0",
     "@tailwindcss/vite": "^4.1.10",
     "dompurify": "^3.2.6",
     "monaco-editor": "^0.52.2",

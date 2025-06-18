@@ -1,52 +1,46 @@
 <script setup>
-import { ref, watch } from "vue";
 import { useTimerStore } from "../stores/timer";
+import { useModalStore } from "../stores/modal";
+import { Cog6ToothIcon } from "@heroicons/vue/24/outline";
+import Tooltip from "./Tooltip.vue";
+import { computed } from "vue";
+
+const timerStore = useTimerStore();
+const modalStore = useModalStore();
 
 const props = defineProps({
-  isModalOpen: {
-    type: Boolean,
-    required: true
+  toopTipPlacement: {
+    type: String,
+    default: "bottom-right"
   }
 });
 
-const emit = defineEmits(["toggle-settings"]);
-const isOpen = ref(false);
-const timerStore = useTimerStore();
-
-// Watch for modal state changes from parent
-watch(
-  () => props.isModalOpen,
-  (newValue) => {
-    isOpen.value = newValue;
-  }
+const tooltipText = computed(() =>
+  timerStore.isRunning
+    ? "Cannot change settings while timer is running"
+    : "Settings"
 );
 
 const toggleSettings = () => {
   if (!timerStore.isRunning) {
-    isOpen.value = !isOpen.value;
-    emit("toggle-settings", isOpen.value);
+    modalStore.toggleSettings();
   }
 };
 </script>
 
 <template>
-  <button
-    @click="toggleSettings"
-    :disabled="timerStore.isRunning"
-    class="w-full h-10 flex items-center justify-center bg-gray-700 transition-colors group border-none"
-    :title="
-      timerStore.isRunning
-        ? 'Cannot change settings while timer is running'
-        : 'Settings'
-    "
-  >
-    <div
-      class="text-white text-xl font-bold transition-transform duration-300"
-      :class="{ 'group-hover:rotate-90': !timerStore.isRunning }"
+  <Tooltip :text="tooltipText" :placement="toopTipPlacement">
+    <button
+      @click="toggleSettings"
+      :disabled="timerStore.isRunning"
+      class="m-auto flex items-center justify-center transition-colors group border-none"
     >
-      ⚙️
-    </div>
-  </button>
+      <Cog6ToothIcon
+        class="w-6 h-6 text-white text-xl transition-transform duration-300"
+        :class="{ 'group-hover:rotate-90': !timerStore.isRunning }"
+      />
+    </button>
+  </Tooltip>
 </template>
 
 <style scoped></style>

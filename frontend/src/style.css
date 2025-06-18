@@ -15,15 +15,6 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
-}
-
 body {
   margin: 0;
   display: flex;
@@ -84,6 +75,16 @@ strong::after {
   content: "";
   display: block;
   height: 1em;
+}
+
+.prose ul {
+  list-style-type: disc;
+  padding-left: 1.5rem; /* or 2rem for more space */
+}
+
+.prose ol {
+  list-style-type: decimal;
+  padding-left: 1.5rem;
 }
 
 #app {

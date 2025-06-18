@@ -1,22 +1,22 @@
 <script setup>
 import CodeEditor from "./components/CodeEditor.vue";
-import SettingsButton from "./components/SettingsButton.vue";
-import SettingsModal from "./components/SettingsModal.vue";
-import QuestionsButton from "./components/QuestionsButton.vue";
+import SideBarLeft from "./components/SideBarLeft.vue";
+import Landing from "./components/Landing.vue";
 import Timer from "./components/Timer.vue";
 import Question from "./components/Question.vue";
-import { onUnmounted, ref, watch, computed } from "vue";
+import { onUnmounted, watch, computed } from "vue";
 import { useTimerStore } from "./stores/timer";
 import { useQuestionStore } from "./stores/question";
+import { CodeBracketIcon } from "@heroicons/vue/24/outline";
 
 const timerStore = useTimerStore();
 const questionStore = useQuestionStore();
 
-// Settings modal state
-const isSettingsOpen = ref(false);
-
-const toggleSettings = (isOpen) => {
-  isSettingsOpen.value = isOpen;
+const resetMock = () => {
+  if (confirm("Are you sure you want to reset the mock?")) {
+    questionStore.resetQuestions();
+    timerStore.resetTimer();
+  }
 };
 
 // Computed properties for current question
@@ -37,72 +37,45 @@ watch(
 </script>
 
 <template>
-  <div
+  <header
     class="z-10 flex justify-between items-center w-screen h-[3.5rem] bg-blue-900"
   >
+    <!-- Logo -->
     <div class="pl-4">
-      <img src="/logo.png" class="h-10 p-2" alt="logo" />
+      <CodeBracketIcon class="w-10 h-10 text-amber-500" />
     </div>
+
+    <!-- Reset Mock Button -->
     <div class="flex items-center gap-2">
+      <div v-if="questionStore.questions.length > 0" class="pr-4">
+        <button
+          class="px-4 py-2 rounded-lg text-white bg-blue-700 hover:bg-blue-800 border border-red-700/20 transition-colors flex items-center gap-2 capitalize"
+          @click="resetMock"
+          :disabled="questionStore.questions.length === 0"
+        >
+          Reset Mock
+        </button>
+      </div>
+
+      <!-- Timer -->
       <div class="pr-4">
         <Timer />
       </div>
-
-      <div class="pr-4">
-        <QuestionsButton />
-      </div>
     </div>
-  </div>
+  </header>
 
   <div class="flex w-screen h-[calc(100vh-3.5rem)] overflow-hidden">
     <!-- Left sidebar -->
-    <div class="w-10 bg-gray-700 flex flex-col gap-6">
-      <SettingsButton
-        :is-modal-open="isSettingsOpen"
-        @toggle-settings="toggleSettings"
-      />
-
-      <!-- Questions List -->
-      <div
-        v-if="questionStore.questions.length > 0"
-        class="flex flex-col gap-2"
-      >
-        <button
-          v-for="(question, index) in questionStore.questions"
-          :key="index"
-          :class="[
-            'text-center transition-colors',
-            questionStore.currentQuestionIndex === index
-              ? 'bg-blue-800 text-white'
-              : 'bg-gray-700 hover:bg-gray-600 text-gray-200'
-          ]"
-          @click="questionStore.setCurrentQuestionIndex(index)"
-        >
-          {{ index + 1 }}
-        </button>
-      </div>
-    </div>
-
-    <!-- Settings Modal -->
-    <SettingsModal :is-open="isSettingsOpen" @close="toggleSettings(false)" />
+    <SideBarLeft />
 
     <!-- Question Pane -->
-    <div class="w-1/2 overflow-auto border-r border-gray-300">
-      <Question v-if="currentQuestion" :question="currentQuestion" />
-
-      <div v-else class="flex justify-center gap-10 pt-20">
-        <QuestionsButton />
-        <div class="w-10">
-          <SettingsButton
-            :is-modal-open="isSettingsOpen"
-            @toggle-settings="toggleSettings"
-          />
-        </div>
-      </div>
+    <div class="w-1/2 overflow-auto border-r border-gray-700">
+      <Landing v-if="!currentQuestion" />
+      <Question v-else :question="currentQuestion" />
     </div>
 
     <!-- Code Editor Pane -->
-    <div class="w-1/2 h-[calc(100vh-2.5rem)] overflow-auto">
+    <div class="w-1/2 h-[calc(100vh-2.5rem)] overflow-auto bg-[#1E1E1E]">
       <CodeEditor
         :initial-code="questionStore.getCurrentCode()"
         :disabled="questionStore.isEditorDisabled"

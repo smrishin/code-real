@@ -2,11 +2,11 @@
 <template>
   <div>
     <button
-      class="px-4 py-2 rounded-lg text-white bg-blue-700 hover:bg-blue-800 transition-colors flex items-center gap-2 drop-shadow-[0_0_10px_rgba(239,68,68,0.5)]"
+      class="px-4 py-2 rounded-lg text-white bg-blue-700 hover:bg-blue-800 border border-red-700/20 transition-colors flex items-center gap-2 capitalize"
       @click="getQuestions"
       :disabled="isLoading"
     >
-      Get Questions
+      Start Mock
     </button>
     <Loader v-if="isLoading" />
   </div>
@@ -18,9 +18,11 @@ import { useSettingsStore } from "../stores/settings";
 import { useQuestionStore } from "../stores/question";
 import DOMPurify from "dompurify";
 import Loader from "./Loader.vue";
+import { useTimerStore } from "../stores/timer";
 
 const settingsStore = useSettingsStore();
 const questionStore = useQuestionStore();
+const timerStore = useTimerStore();
 const isLoading = ref(false);
 
 const getQuestions = async () => {
@@ -68,6 +70,8 @@ const getQuestions = async () => {
         initialCode: q.initialCode || ""
       }))
     );
+
+    timerStore.startTimer();
   } catch (error) {
     console.error("Error:", error);
     alert("Error getting questions");

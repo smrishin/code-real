@@ -47,9 +47,11 @@ export const useQuestionStore = defineStore("question", () => {
   function getCurrentCode() {
     const currentQuestion = getCurrentQuestion();
     if (currentQuestion) {
-      return userCodes.value[currentQuestion.id] || "";
+      return userCodes.value[currentQuestion.id] || "# Write your code here...";
     }
-    return "";
+    return `'''
+Start the mock test to write your code
+'''`;
   }
 
   function setEditorDisabled(disabled) {
