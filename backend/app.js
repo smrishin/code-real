@@ -21,4 +21,12 @@ app.use((req, res, next) => {
   });
 });
 
-app.listen(PORT, () => console.log(`App running on http://localhost:${PORT}`));
+if (process.env.NODE_ENV === "localhost") {
+  const port = process.env.PORT || 5000;
+
+  app.listen(port);
+
+  console.log(`listening on http://localhost:${port}`);
+}
+
+module.exports = app;
