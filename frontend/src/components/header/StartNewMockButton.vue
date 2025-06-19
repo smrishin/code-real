@@ -18,7 +18,7 @@ const onRestartMockClick = () => {
 const restartMock = () => {
   questionStore.restartQuestions();
   timerStore.resetTimer();
-  modalStore.closeConfirmRestart();
+  modalStore.closeAllModals();
 };
 </script>
 
