@@ -31,19 +31,22 @@ const getQuestions = async () => {
 
   isLoading.value = true;
   try {
-    const response = await fetch(`${import.meta.env.VITE_API_URL}/questions`, {
-      method: "POST",
-      body: JSON.stringify({
-        company: settingsStore.company,
-        noOfQuestions: settingsStore.questionCount,
-        difficulty: settingsStore.difficulty,
-        topics: settingsStore.topics,
-        secretCode: secretCode
-      }),
-      headers: {
-        "Content-Type": "application/json"
+    const response = await fetch(
+      `${import.meta.env.VITE_API_URL || ""}/api/questions`,
+      {
+        method: "POST",
+        body: JSON.stringify({
+          company: settingsStore.company,
+          noOfQuestions: settingsStore.questionCount,
+          difficulty: settingsStore.difficulty,
+          topics: settingsStore.topics,
+          secretCode: secretCode
+        }),
+        headers: {
+          "Content-Type": "application/json"
+        }
       }
-    });
+    );
 
     if (!response.ok) {
       const error = await response.json();
