@@ -10,7 +10,7 @@ import SettingsButton from "../settings/SettingsButton.vue";
     <div class="flex flex-col gap-4 text-gray-400">
       <h2 class="text-2xl font-bold text-blue-600 text-center">What is it?</h2>
       <p class="text-md">
-        This is a mock coding interview tool, build by a developer who got tired
+        This is a mock coding interview tool, built by a developer who got tired
         of solving algorithm problems that felt more like math puzzles than
         actual interviews.
       </p>

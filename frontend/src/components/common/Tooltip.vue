@@ -3,7 +3,8 @@ import { ref } from "vue";
 
 const props = defineProps({
   text: { type: String, required: true },
-  placement: { type: String, default: "top" }
+  placement: { type: String, default: "top" },
+  disabled: { type: Boolean, default: false }
 });
 
 const show = ref(false);
@@ -23,10 +24,10 @@ const placements = {
 <template>
   <div
     class="relative inline-block"
-    @mouseenter="show = true"
-    @mouseleave="show = false"
-    @focus="show = true"
-    @blur="show = false"
+    @mouseenter="!disabled && (show = true)"
+    @mouseleave="!disabled && (show = false)"
+    @focus="!disabled && (show = true)"
+    @blur="!disabled && (show = false)"
     @focusin="show = true"
     @focusout="show = false"
     tabindex="0"

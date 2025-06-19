@@ -5,6 +5,10 @@ export const useModalStore = defineStore("modal", () => {
   // Modal states
   const isSettingsOpen = ref(false);
   const isContactOpen = ref(false);
+  const isErrorOpen = ref(false);
+  const isPromptSecretCodeOpen = ref(false);
+  const isConfirmRestartOpen = ref(false);
+  const isTimeUpOpen = ref(false);
 
   // Actions
   const openSettings = () => {
@@ -31,17 +35,56 @@ export const useModalStore = defineStore("modal", () => {
     isContactOpen.value = !isContactOpen.value;
   };
 
+  const openError = () => {
+    isErrorOpen.value = true;
+  };
+
+  const closeError = () => {
+    isErrorOpen.value = false;
+  };
+
+  const openPromptSecretCode = () => {
+    isPromptSecretCodeOpen.value = true;
+  };
+
+  const closePromptSecretCode = () => {
+    isPromptSecretCodeOpen.value = false;
+  };
+
+  const openConfirmRestart = () => {
+    isConfirmRestartOpen.value = true;
+  };
+
+  const closeConfirmRestart = () => {
+    isConfirmRestartOpen.value = false;
+  };
+
+  const openTimeUp = () => {
+    isTimeUpOpen.value = true;
+  };
+
+  const closeTimeUp = () => {
+    isTimeUpOpen.value = false;
+  };
+
   // Close all modals
   const closeAllModals = () => {
     isSettingsOpen.value = false;
     isContactOpen.value = false;
+    isErrorOpen.value = false;
+    isPromptSecretCodeOpen.value = false;
+    isConfirmRestartOpen.value = false;
+    isTimeUpOpen.value = false;
   };
 
   return {
     // State
     isSettingsOpen,
     isContactOpen,
-
+    isErrorOpen,
+    isPromptSecretCodeOpen,
+    isConfirmRestartOpen,
+    isTimeUpOpen,
     // Actions
     openSettings,
     closeSettings,
@@ -49,6 +92,15 @@ export const useModalStore = defineStore("modal", () => {
     openContact,
     closeContact,
     toggleContact,
+    openError,
+    closeError,
+    openPromptSecretCode,
+    closePromptSecretCode,
+    openConfirmRestart,
+    closeConfirmRestart,
+    openTimeUp,
+    closeTimeUp,
+
     closeAllModals
   };
 });

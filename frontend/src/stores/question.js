@@ -58,7 +58,7 @@ Start the mock test to write your code
     isEditorDisabled.value = disabled;
   }
 
-  function resetQuestions() {
+  function restartQuestions() {
     questions.value = [];
     currentQuestionIndex.value = null;
     userCodes.value = {};
@@ -78,6 +78,6 @@ Start the mock test to write your code
     updateCode,
     getCurrentCode,
     setEditorDisabled,
-    resetQuestions
+    restartQuestions
   };
 });

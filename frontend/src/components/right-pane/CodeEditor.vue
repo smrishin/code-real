@@ -31,7 +31,7 @@ const handleLeetCodeClick = async () => {
     showToast.value = true;
     setTimeout(() => {
       showToast.value = false;
-    }, 5000);
+    }, 5 * 1000);
     openLink(props.leetcodeLink);
   } catch (err) {
     console.error("Failed to copy code to clipboard:", err);

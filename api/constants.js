@@ -60,7 +60,9 @@ const QUESTION_PROMPT_TO_AI = (companyName, questionInfo) => `
 
     Function signature inside a Python code block using <pre><code class="language-python">.
 
-    Examples inside <pre><code>, with both Input and Output, and include a small comment on the output.
+    Examples inside <pre><code>, with both Input and Output.
+    Each example should be in a separate <pre><code> block.
+    Exmaples should include a small comment on the output in a <p> tag starting with "Explanation: " in a new line and should be after the <pre><code> block.
 
     Constraints as <ul><li>...</li></ul>
 

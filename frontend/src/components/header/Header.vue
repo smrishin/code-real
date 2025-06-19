@@ -2,21 +2,13 @@
 import { CodeBracketIcon } from "@heroicons/vue/24/outline";
 
 import { useQuestionStore } from "../../stores/question";
-import { useTimerStore } from "../../stores/timer";
 
 import Timer from "./Timer.vue";
 import SettingsButton from "../settings/SettingsButton.vue";
 import ContactButton from "../contact/ContactButton.vue";
+import StartNewMockButton from "./StartNewMockButton.vue";
 
-const timerStore = useTimerStore();
 const questionStore = useQuestionStore();
-
-const resetMock = () => {
-  if (confirm("Are you sure you want to reset the mock?")) {
-    questionStore.resetQuestions();
-    timerStore.resetTimer();
-  }
-};
 </script>
 
 <template>
@@ -39,7 +31,7 @@ const resetMock = () => {
           v-for="(question, index) in questionStore.questions"
           :key="index"
           :class="[
-            'text-center transition-colors px-8 h-10 rounded-lg',
+            'text-center transition-colors px-8 h-10 rounded-lg font-semibold',
             questionStore.currentQuestionIndex === index
               ? 'bg-blue-800 text-white'
               : 'bg-blue-900 hover:bg-blue-700 text-gray-200'
@@ -50,16 +42,8 @@ const resetMock = () => {
         </button>
       </div>
 
-      <!-- Reset Mock Button -->
-      <div v-if="questionStore.questions.length > 0" class="">
-        <button
-          class="flex items-center gap-2 capitalize px-4 h-10 rounded-lg text-white bg-blue-800 hover:bg-blue-700 transition-colors"
-          @click="resetMock"
-          :disabled="questionStore.questions.length === 0"
-        >
-          Reset Mock
-        </button>
-      </div>
+      <!-- Start New Mock Button -->
+      <StartNewMockButton />
 
       <!-- Timer -->
       <div class="pr-4">
