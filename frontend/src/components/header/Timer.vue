@@ -1,5 +1,5 @@
 <script setup>
-import { useTimerStore } from "../stores/timer";
+import { useTimerStore } from "../../stores/timer";
 import { ref } from "vue";
 import {
   ClockIcon,

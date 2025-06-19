@@ -1,11 +1,12 @@
 <script setup>
 import { onMounted, onUnmounted } from "vue";
-import { useModalStore } from "../stores/modal";
 import {
   XMarkIcon,
   EnvelopeIcon,
   BriefcaseIcon
 } from "@heroicons/vue/24/outline";
+
+import { useModalStore } from "../../stores/modal";
 
 const modalStore = useModalStore();
 

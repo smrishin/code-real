@@ -1,10 +1,12 @@
 <script setup>
 import { CodeBracketIcon } from "@heroicons/vue/24/outline";
+
+import { useQuestionStore } from "../../stores/question";
+import { useTimerStore } from "../../stores/timer";
+
 import Timer from "./Timer.vue";
-import { useQuestionStore } from "../stores/question";
-import { useTimerStore } from "../stores/timer";
-import SettingsButton from "./SettingsButton.vue";
-import ContactButton from "./ContactButton.vue";
+import SettingsButton from "../settings/SettingsButton.vue";
+import ContactButton from "../contact/ContactButton.vue";
 
 const timerStore = useTimerStore();
 const questionStore = useQuestionStore();

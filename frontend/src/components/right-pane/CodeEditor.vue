@@ -1,47 +1,9 @@
-<template>
-  <vue-monaco-editor
-    v-model:value="code"
-    language="python"
-    theme="vs-dark"
-    :options="options"
-    class="py-4 h-full"
-  />
-  <div v-if="leetcodeLink" class="fixed bottom-5 right-5 text-sm">
-    <Transition
-      enter-active-class="transition duration-200 ease-out"
-      enter-from-class="transform translate-y-2 opacity-0"
-      enter-to-class="transform translate-y-0 opacity-100"
-      leave-active-class="transition duration-200 ease-in"
-      leave-from-class="transform translate-y-0 opacity-100"
-      leave-to-class="transform translate-y-2 opacity-0"
-    >
-      <div
-        v-if="showToast"
-        class="absolute bottom-full mb-2 left-1/2 -translate-x-1/2 px-3 py-1 bg-green-500 text-white rounded-md whitespace-nowrap"
-      >
-        Code Copied!
-      </div>
-    </Transition>
-    <button
-      @click="handleLeetCodeClick"
-      class="flex items-center gap-2 px-3 py-1 text-amber-500 bg-transparent hover:bg-amber-500/10 backdrop-blur-sm backdrop-brightness-80 rounded-md"
-    >
-      <PlayIcon class="w-4 h-4" />
-      Run
-      <img
-        src="../assets/leetcode.png"
-        alt="LeetCode"
-        class="w-4 h-4 rounded-full mr-1"
-      />
-    </button>
-  </div>
-</template>
-
 <script setup>
 import { ref, onMounted, computed, watch } from "vue";
 import { VueMonacoEditor } from "@guolao/vue-monaco-editor";
-import { openLink } from "../utils";
 import { PlayIcon } from "@heroicons/vue/24/outline";
+
+import { openLink } from "../../utils";
 
 const props = defineProps({
   initialCode: {
@@ -106,6 +68,45 @@ onMounted(() => {
   code.value = props.initialCode;
 });
 </script>
+
+<template>
+  <vue-monaco-editor
+    v-model:value="code"
+    language="python"
+    theme="vs-dark"
+    :options="options"
+    class="py-4 h-full"
+  />
+  <div v-if="leetcodeLink" class="fixed bottom-5 right-5 text-sm">
+    <Transition
+      enter-active-class="transition duration-200 ease-out"
+      enter-from-class="transform translate-y-2 opacity-0"
+      enter-to-class="transform translate-y-0 opacity-100"
+      leave-active-class="transition duration-200 ease-in"
+      leave-from-class="transform translate-y-0 opacity-100"
+      leave-to-class="transform translate-y-2 opacity-0"
+    >
+      <div
+        v-if="showToast"
+        class="absolute bottom-full mb-2 left-1/2 -translate-x-1/2 px-3 py-1 bg-green-500 text-white rounded-md whitespace-nowrap"
+      >
+        Code Copied!
+      </div>
+    </Transition>
+    <button
+      @click="handleLeetCodeClick"
+      class="flex items-center gap-2 px-3 py-1 text-amber-500 bg-transparent hover:bg-amber-500/10 backdrop-blur-sm backdrop-brightness-80 rounded-md"
+    >
+      <PlayIcon class="w-4 h-4" />
+      Run
+      <img
+        src="../../assets/leetcode.png"
+        alt="LeetCode"
+        class="w-4 h-4 rounded-full mr-1"
+      />
+    </button>
+  </div>
+</template>
 
 <style scoped>
 .vue-monaco-editor,

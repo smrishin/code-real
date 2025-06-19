@@ -1,24 +1,12 @@
-<!-- button to get questions -->
-<template>
-  <div>
-    <button
-      class="px-4 py-2 rounded-lg text-white bg-blue-700 hover:bg-blue-800 border border-red-700/20 transition-colors flex items-center gap-2 capitalize"
-      @click="getQuestions"
-      :disabled="isLoading"
-    >
-      Start Mock
-    </button>
-    <Loader v-if="isLoading" />
-  </div>
-</template>
-
 <script setup>
 import { ref } from "vue";
-import { useSettingsStore } from "../stores/settings";
-import { useQuestionStore } from "../stores/question";
 import DOMPurify from "dompurify";
-import Loader from "./Loader.vue";
-import { useTimerStore } from "../stores/timer";
+
+import Loader from "../common/Loader.vue";
+
+import { useSettingsStore } from "../../stores/settings";
+import { useQuestionStore } from "../../stores/question";
+import { useTimerStore } from "../../stores/timer";
 
 const settingsStore = useSettingsStore();
 const questionStore = useQuestionStore();
@@ -83,5 +71,18 @@ const getQuestions = async () => {
   }
 };
 </script>
+
+<template>
+  <div>
+    <button
+      class="px-4 py-2 rounded-lg text-white font-bold text-md bg-blue-700 hover:bg-blue-800 border border-red-700/20 transition-colors flex items-center gap-2 capitalize"
+      @click="getQuestions"
+      :disabled="isLoading"
+    >
+      Start Mock
+    </button>
+    <Loader v-if="isLoading" />
+  </div>
+</template>
 
 <style scoped></style>

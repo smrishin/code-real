@@ -1,9 +1,11 @@
 <script setup>
-import { useTimerStore } from "../stores/timer";
-import { useModalStore } from "../stores/modal";
 import { Cog6ToothIcon } from "@heroicons/vue/24/outline";
-import Tooltip from "./Tooltip.vue";
 import { computed } from "vue";
+
+import Tooltip from "../common/Tooltip.vue";
+
+import { useTimerStore } from "../../stores/timer";
+import { useModalStore } from "../../stores/modal";
 
 const timerStore = useTimerStore();
 const modalStore = useModalStore();

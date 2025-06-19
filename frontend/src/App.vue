@@ -1,11 +1,12 @@
 <script setup>
-import CodeEditor from "./components/CodeEditor.vue";
+import CodeEditor from "./components/right-pane/CodeEditor.vue";
 // import SideBarLeft from "./components/SideBarLeft.vue";
-import Landing from "./components/Landing.vue";
-import Question from "./components/Question.vue";
-import Header from "./components/Header.vue";
-import SettingsModal from "./components/SettingsModal.vue";
-import ContactModal from "./components/ContactModal.vue";
+import Landing from "./components/left-pane/Landing.vue";
+import Question from "./components/left-pane/Question.vue";
+import Header from "./components/header/Header.vue";
+import SettingsModal from "./components/settings/SettingsModal.vue";
+import ContactModal from "./components/contact/ContactModal.vue";
+
 import { onUnmounted, watch, computed } from "vue";
 import { useTimerStore } from "./stores/timer";
 import { useQuestionStore } from "./stores/question";

@@ -1,3 +1,15 @@
+<script setup>
+import { openLink } from "../../utils";
+import { ArrowTopRightOnSquareIcon } from "@heroicons/vue/24/outline";
+
+const props = defineProps({
+  question: {
+    type: Object,
+    required: true
+  }
+});
+</script>
+
 <template>
   <div v-if="question" class="relative h-full">
     <div
@@ -34,7 +46,7 @@
         class="flex items-center gap-1 px-3 py-1 text-sm font-medium text-amber-500 bg-transparent hover:bg-amber-500/10 rounded-md border border-amber-500/20"
       >
         <img
-          src="../assets/leetcode.png"
+          src="../../assets/leetcode.png"
           alt="LeetCode"
           class="w-4 h-4 rounded-full mr-1"
         />
@@ -46,7 +58,7 @@
         class="flex items-center gap-1 px-3 py-1 text-sm font-medium text-white bg-transparent hover:bg-white/10 rounded-md border border-white/20"
       >
         <img
-          src="../assets/neetcode.jpg"
+          src="../../assets/neetcode.jpg"
           alt="NeetCode"
           class="w-4 h-4 rounded-full mr-1"
         />
@@ -56,15 +68,3 @@
     </div>
   </div>
 </template>
-
-<script setup>
-import { openLink } from "../utils";
-import { ArrowTopRightOnSquareIcon } from "@heroicons/vue/24/outline";
-
-const props = defineProps({
-  question: {
-    type: Object,
-    required: true
-  }
-});
-</script>
