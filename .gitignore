@@ -32,3 +32,4 @@ scripts/dist/
 scripts/build/
 scr
 .vercel
+.env*.local

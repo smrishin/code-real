@@ -1,0 +1,12 @@
+{
+  "name": "code-real",
+  "version": "1.0.0",
+  "description": "CodeReal: Interview style company based questions in a timed exam setup",
+  "main": "index.js",
+  "scripts": {
+    "build": "cd frontend && npm install && npm run build",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
