@@ -9,12 +9,13 @@ const {
 module.exports = {
   async getQuestions(req, res, next) {
     try {
+      console.error("env", process.env.QUESTIONS_SECRET_CODE);
       const { secretCode } = req.body;
 
       // Validate secret code
       if (!secretCode || secretCode !== process.env.QUESTIONS_SECRET_CODE) {
         return res.status(401).json({
-          error: "Invalid secret code"
+          error: "Invalid secret code 11 " + process.env.QUESTIONS_SECRET_CODE
         });
       }
 

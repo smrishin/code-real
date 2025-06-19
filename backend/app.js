@@ -7,7 +7,7 @@ const dotenv = require("dotenv");
 dotenv.config();
 
 const app = express();
-const PORT = 5000;
+const PORT = process.env.PORT || 5000;
 
 app.use(cors());
 app.use(express.json());
@@ -21,4 +21,11 @@ app.use((req, res, next) => {
   });
 });
 
-app.listen(PORT, () => console.log(`App running on http://localhost:${PORT}`));
+// Only start the server if we're not in a serverless environment
+if (process.env.NODE_ENV === "localhost" || !process.env.VERCEL) {
+  app.listen(PORT, () =>
+    console.log(`App running on http://localhost:${PORT}`)
+  );
+}
+
+module.exports = app;

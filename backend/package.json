@@ -1,9 +1,14 @@
 {
   "name": "backend",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
     "dev": "node app.js",
+    "start": "node app.js",
+    "build": "echo 'No build step required'",
+    "setup-vercel-env": "node scripts/setup-vercel-env.js",
+    "vercel-deploy-dev": "npm run setup-vercel-env && vercel",
+    "vercel-deploy-prod": "npm run setup-vercel-env && vercel --prod",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
