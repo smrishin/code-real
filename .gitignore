@@ -1,3 +1,4 @@
+.vercel/
 # Global ignores
 .DS_Store
 Thumbs.db
@@ -10,11 +11,11 @@ yarn-debug.log*
 yarn-error.log*
 .pnpm-store/
 
-# Backend (Node.js + Express)
-backend/node_modules/
-backend/.env*
-backend/dist/
-backend/build/
+# API (Node.js + Express)
+api/node_modules/
+api/.env*
+api/dist/
+api/build/
 
 # Frontend (Vue 3)
 frontend/node_modules/
@@ -30,3 +31,4 @@ scripts/.env*
 scripts/dist/
 scripts/build/
 scr
+.vercel

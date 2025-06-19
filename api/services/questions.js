@@ -10,6 +10,15 @@ const {
 } = require("../constants");
 
 const validateInput = (payload) => {
+  if (
+    !payload.noOfQuestions ||
+    !payload.difficulty ||
+    !payload.topics ||
+    !payload.company
+  ) {
+    throw new Error("Missing required fields");
+  }
+
   if (payload.noOfQuestions < 1 || payload.noOfQuestions > MAX_QUESTIONS) {
     throw new Error(
       `Number of questions must be between 1 and ${MAX_QUESTIONS}`
