@@ -12,7 +12,7 @@ const props = defineProps({
   },
   width: {
     type: String,
-    default: "w-[calc(100vw-30rem)]"
+    default: "w-300"
   },
   maxHeight: {
     type: String,
@@ -68,7 +68,7 @@ watch(
 <template>
   <div
     v-if="isOpen"
-    class="fixed inset-0 backdrop-blur-[10px] flex items-center justify-center z-50"
+    class="fixed inset-0 z-50 backdrop-blur-[10px] flex items-center justify-center"
     @click="handleBackdropClick"
   >
     <div
@@ -78,7 +78,7 @@ watch(
     >
       <!-- Header -->
       <div
-        class="sticky top-0 backdrop-blur-[15px] px-6 pt-4 flex justify-between items-center"
+        class="sticky top-0 z-10 backdrop-blur-[15px] px-6 py-4 flex justify-between items-center"
       >
         <h2 class="text-xl font-semibold text-gray-100" :class="titleClass">
           {{ title }}

@@ -4,4 +4,9 @@ const openLink = (url) => {
   window.open(url, "_blank", "noopener,noreferrer");
 };
 
-export { openLink };
+const scrollToElement = (elementId) => {
+  const element = document.getElementById(elementId);
+  element.scrollIntoView({ behavior: "smooth", block: "start" });
+};
+
+export { openLink, scrollToElement };

@@ -9,6 +9,7 @@ export const useModalStore = defineStore("modal", () => {
   const isPromptSecretCodeOpen = ref(false);
   const isConfirmRestartOpen = ref(false);
   const isTimeUpOpen = ref(false);
+  const isDesktopRecommendationOpen = ref(false);
 
   // Actions
   const openSettings = () => {
@@ -67,6 +68,14 @@ export const useModalStore = defineStore("modal", () => {
     isTimeUpOpen.value = false;
   };
 
+  const openDesktopRecommendation = () => {
+    isDesktopRecommendationOpen.value = true;
+  };
+
+  const closeDesktopRecommendation = () => {
+    isDesktopRecommendationOpen.value = false;
+  };
+
   // Close all modals
   const closeAllModals = () => {
     isSettingsOpen.value = false;
@@ -75,6 +84,7 @@ export const useModalStore = defineStore("modal", () => {
     isPromptSecretCodeOpen.value = false;
     isConfirmRestartOpen.value = false;
     isTimeUpOpen.value = false;
+    isDesktopRecommendationOpen.value = false;
   };
 
   return {
@@ -85,6 +95,7 @@ export const useModalStore = defineStore("modal", () => {
     isPromptSecretCodeOpen,
     isConfirmRestartOpen,
     isTimeUpOpen,
+    isDesktopRecommendationOpen,
     // Actions
     openSettings,
     closeSettings,
@@ -100,6 +111,8 @@ export const useModalStore = defineStore("modal", () => {
     closeConfirmRestart,
     openTimeUp,
     closeTimeUp,
+    openDesktopRecommendation,
+    closeDesktopRecommendation,
 
     closeAllModals
   };

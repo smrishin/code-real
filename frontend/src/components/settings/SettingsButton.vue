@@ -1,13 +1,16 @@
 <script setup>
 import { Cog6ToothIcon } from "@heroicons/vue/24/outline";
 import { computed } from "vue";
+import { scrollToElement } from "../../utils";
 
 import Tooltip from "../common/Tooltip.vue";
 
 import { useTimerStore } from "../../stores/timer";
 import { useModalStore } from "../../stores/modal";
+import { useQuestionStore } from "../../stores/question";
 
 const timerStore = useTimerStore();
+const questionStore = useQuestionStore();
 const modalStore = useModalStore();
 
 const props = defineProps({
@@ -32,6 +35,10 @@ const tooltipText = computed(() =>
 );
 
 const toggleSettings = () => {
+  if (questionStore.questions.length === 0) {
+    scrollToElement("settings");
+    return;
+  }
   if (!timerStore.isRunning) {
     modalStore.toggleSettings();
   }
@@ -42,7 +49,7 @@ const toggleSettings = () => {
   <Tooltip
     :text="tooltipText"
     :placement="toopTipPlacement"
-    :disabled="disableTooltip"
+    :disabled="disableTooltip && !timerStore.isRunning"
   >
     <button
       @click="toggleSettings"

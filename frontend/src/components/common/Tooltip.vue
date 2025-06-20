@@ -10,6 +10,7 @@ const props = defineProps({
 const show = ref(false);
 
 const placements = {
+  none: "hidden",
   top: "left-1/2 -translate-x-1/2 bottom-full mb-2",
   bottom: "left-1/2 -translate-x-1/2 top-full mt-2",
   right: "top-1/2 left-full ml-2 -translate-y-1/2",
@@ -28,6 +29,7 @@ const placements = {
     @mouseleave="!disabled && (show = false)"
     @focus="!disabled && (show = true)"
     @blur="!disabled && (show = false)"
+    @click="show = false"
     @focusin="show = true"
     @focusout="show = false"
     tabindex="0"

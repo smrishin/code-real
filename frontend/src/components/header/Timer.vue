@@ -1,5 +1,5 @@
 <script setup>
-import { ref, watch } from "vue";
+import { ref, watch, computed } from "vue";
 import {
   ClockIcon,
   EyeSlashIcon,
@@ -13,10 +13,21 @@ import { useTimerStore } from "../../stores/timer";
 import { useModalStore } from "../../stores/modal";
 
 import Modal from "../common/Modal.vue";
-import StartNewMockButton from "./StartNewMockButton.vue";
+import RestartMockButton from "./RestartMockButton.vue";
 
 const timerStore = useTimerStore();
 const modalStore = useModalStore();
+
+const props = defineProps({
+  isScrolled: {
+    type: Boolean,
+    default: false
+  }
+});
+
+const timeUpToastPosition = computed(() => {
+  return props.isScrolled ? "top-24 md:top-16" : "top-32 md:top-16";
+});
 
 const viewTimer = ref(true);
 const showTimeUpToast = ref(false);
@@ -47,7 +58,8 @@ watch(
   >
     <div
       v-if="showTimeUpToast"
-      class="fixed top-16 right-4 flex items-center gap-2 px-4 py-2 bg-red-600 bg-opacity-50 text-white rounded-lg whitespace-nowrap z-50 shadow-xl font-semibold text-sm animate-bounce"
+      class="fixed z-50 right-4 flex items-center gap-2 px-4 py-2 bg-red-600 bg-opacity-50 text-white rounded-lg whitespace-nowrap shadow-xl font-semibold text-sm animate-bounce transition-all duration-300 ease-in-out"
+      :class="[timeUpToastPosition]"
     >
       <ClockIcon class="w-5 h-5" />
       Time's Up!
@@ -56,6 +68,7 @@ watch(
 
   <!-- Time Up Modal -->
   <Modal
+    class="px-2"
     :is-open="modalStore.isTimeUpOpen"
     @close="modalStore.closeTimeUp"
     width="w-140"
@@ -84,10 +97,10 @@ watch(
 
     <template #footer>
       <div class="flex justify-center gap-4">
-        <StartNewMockButton />
+        <RestartMockButton button-text="Start New Mock" />
 
         <button
-          class="text-sm font-semibold capitalize px-4 h-10 rounded-lg text-white bg-blue-700 hover:bg-blue-600 transition-colors"
+          class="text-xs md:text-sm font-semibold capitalize px-4 h-10 rounded-lg text-white bg-blue-700 hover:bg-blue-600 transition-colors"
           @click="modalStore.closeTimeUp"
         >
           Go Back To Current Mock

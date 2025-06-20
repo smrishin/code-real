@@ -30,7 +30,7 @@ const closeModal = () => {
       </button>
     </template>
 
-    <div class="flex flex-col gap-4 py-8">
+    <div class="flex flex-col gap-4 py-4">
       <!-- Email Button -->
       <a
         href="mailto:smrishin@gmail.com"

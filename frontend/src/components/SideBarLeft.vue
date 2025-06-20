@@ -1,3 +1,5 @@
+<!-- DEPRECATED -->
+
 <script setup>
 import SettingsButton from "./SettingsButton.vue";
 import ContactButton from "./ContactButton.vue";

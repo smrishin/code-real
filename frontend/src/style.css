@@ -29,9 +29,7 @@ h1 {
 }
 
 button {
-  font-family: inherit;
   cursor: pointer;
-  transition: border-color 0.25s;
 }
 
 button:disabled {

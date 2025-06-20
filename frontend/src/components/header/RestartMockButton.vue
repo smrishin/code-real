@@ -1,5 +1,5 @@
 <script setup>
-import { XMarkIcon } from "@heroicons/vue/24/outline";
+import { XMarkIcon, PlusIcon } from "@heroicons/vue/24/outline";
 
 import { useQuestionStore } from "../../stores/question";
 import { useTimerStore } from "../../stores/timer";
@@ -10,6 +10,17 @@ import Modal from "../common/Modal.vue";
 const timerStore = useTimerStore();
 const questionStore = useQuestionStore();
 const modalStore = useModalStore();
+
+defineProps({
+  isScrolled: {
+    type: Boolean,
+    default: false
+  },
+  buttonText: {
+    type: String,
+    default: "New Mock"
+  }
+});
 
 const onRestartMockClick = () => {
   modalStore.openConfirmRestart();
@@ -25,6 +36,7 @@ const restartMock = () => {
 <template>
   <!-- Confirm Restart Modal -->
   <Modal
+    class="px-2"
     :is-open="modalStore.isConfirmRestartOpen"
     title="Confirm New Mock"
     width="w-120"
@@ -57,14 +69,18 @@ const restartMock = () => {
     </template>
   </Modal>
 
-  <!-- Start New Mock Button -->
-  <div v-if="questionStore.questions.length > 0" class="">
+  <!-- Restart Mock Button -->
+  <div v-if="questionStore.questions.length > 0">
     <button
-      class="flex items-center gap-2 text-sm font-semibold capitalize px-4 h-10 rounded-lg text-white bg-blue-800 hover:bg-blue-700 transition-colors"
+      :class="[
+        'flex items-center gap-2 text-center text-xs md:text-sm font-semibold capitalize px-2 md:px-4 rounded-lg text-white bg-blue-800 hover:bg-blue-700 transition-colors',
+        isScrolled ? 'h-6' : 'h-10'
+      ]"
       @click="onRestartMockClick"
       :disabled="questionStore.questions.length === 0"
     >
-      Start New Mock
+      {{ buttonText }}
+      <PlusIcon v-if="buttonText === 'New Mock'" class="w-4 h-4 font-bold" />
     </button>
   </div>
 </template>

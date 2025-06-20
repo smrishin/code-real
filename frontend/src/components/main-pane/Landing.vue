@@ -1,11 +1,12 @@
 <script setup>
-import StartMockButton from "./StartMockButton.vue";
+import StartMockButton from "../header/StartMockButton.vue";
+import Settings from "../settings/Settings.vue";
 import SettingsButton from "../settings/SettingsButton.vue";
 </script>
 
 <template>
   <div
-    class="max-w-none flex flex-col gap-10 px-12 py-14 lg:mx-8 mx-2 my-6 bg-[#272727] border-2 border-[#373737] rounded-lg"
+    class="max-w-none flex flex-col gap-10 px-6 py-8 md:px-12 md:py-14 mx-4 my-6 md:mx-8 bg-[#272727] border-2 border-[#373737] rounded-lg"
   >
     <div class="flex flex-col gap-4 text-gray-400">
       <h2 class="text-2xl font-bold text-blue-600 text-center">What is it?</h2>
@@ -42,27 +43,33 @@ import SettingsButton from "../settings/SettingsButton.vue";
       </ul>
     </div>
 
-    <div class="flex justify-center gap-6">
+    <div class="flex justify-center items-center gap-6">
       <StartMockButton />
-
-      <div class="flex justify-center items-center">
-        <SettingsButton toopTipPlacement="top-right" />
-      </div>
+      <SettingsButton toopTipPlacement="right" />
     </div>
   </div>
 
-  <div class="prose max-w-none flex flex-col gap-10 px-10 py-6">
-    <div class="flex flex-col gap-2 text-gray-400">
-      <h2 class="text-2xl font-bold text-gray-200">Fully customizable</h2>
-      <p class="text-md">Before you start, you can tweak:</p>
-      <ul class="list-disc list-inside">
-        <li>Company (Amazon, Google, Meta, etc.)</li>
-        <li>Difficulty level</li>
-        <li>Number of questions</li>
-        <li>Timer settings</li>
-        <li>Topics</li>
-      </ul>
-    </div>
+  <div
+    id="settings"
+    class="max-w-none flex flex-col gap-10 px-6 py-8 mx-4 my-6 md:mx-8 bg-[#272727] border-2 border-[#373737] rounded-lg"
+  >
+    <h2 class="text-xl font-semibold text-gray-100">Settings</h2>
+    <Settings
+      field-class="border border-[#474747] bg-[#303030]  focus:outline-none focus:ring-2 focus:ring-[#474747] text-gray-100"
+    />
+    <!-- <div class="prose max-w-none flex flex-col gap-10 px-10 py-6">
+      <div class="flex flex-col gap-2 text-gray-400">
+        <h2 class="text-2xl font-bold text-gray-200">Fully customizable</h2>
+        <p class="text-md">Before you start, you can tweak:</p>
+        <ul class="list-disc list-inside">
+          <li>Company (Amazon, Google, Meta, etc.)</li>
+          <li>Difficulty level</li>
+          <li>Number of questions</li>
+          <li>Timer settings</li>
+          <li>Topics</li>
+        </ul>
+      </div>
+    </div> -->
   </div>
 </template>
 

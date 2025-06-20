@@ -1,19 +1,41 @@
 <script setup>
 import { CodeBracketIcon } from "@heroicons/vue/24/outline";
-
-import { useQuestionStore } from "../../stores/question";
+import { ref, onMounted, onUnmounted } from "vue";
 
 import Timer from "./Timer.vue";
 import SettingsButton from "../settings/SettingsButton.vue";
 import ContactButton from "../contact/ContactButton.vue";
-import StartNewMockButton from "./StartNewMockButton.vue";
+import RestartMockButton from "./RestartMockButton.vue";
+import StartMockButton from "./StartMockButton.vue";
+import QuestionsList from "./QuestionsList.vue";
+import { useQuestionStore } from "../../stores/question";
 
 const questionStore = useQuestionStore();
+
+// Scroll state for mobile header
+const isScrolled = ref(false);
+
+const handleScroll = () => {
+  // Only apply scroll effect on mobile (less than md breakpoint)
+  if (window.innerWidth < 768) {
+    isScrolled.value = window.scrollY > 10;
+  } else {
+    isScrolled.value = false;
+  }
+};
+
+onMounted(() => {
+  window.addEventListener("scroll", handleScroll);
+});
+
+onUnmounted(() => {
+  window.removeEventListener("scroll", handleScroll);
+});
 </script>
 
 <template>
   <header
-    class="z-10 flex justify-between items-center w-screen h-[3.5rem] bg-blue-950"
+    class="sticky top-0 z-10 flex justify-between items-center w-screen h-[3.5rem] bg-blue-950"
   >
     <div class="pl-4 flex items-center gap-7">
       <!-- Logo -->
@@ -24,31 +46,45 @@ const questionStore = useQuestionStore();
       <ContactButton toopTipPlacement="bottom-right" />
     </div>
 
-    <!-- Questions List -->
     <div class="flex items-center gap-4">
-      <div v-if="questionStore.questions.length > 0" class="flex gap-4">
-        <button
-          v-for="(question, index) in questionStore.questions"
-          :key="index"
-          :class="[
-            'text-center transition-colors px-8 h-10 rounded-lg font-semibold',
-            questionStore.currentQuestionIndex === index
-              ? 'bg-blue-800 text-white'
-              : 'bg-blue-900 hover:bg-blue-700 text-gray-200'
-          ]"
-          @click="questionStore.setCurrentQuestionIndex(index)"
-        >
-          Q{{ index + 1 }}
-        </button>
-      </div>
+      <!-- Desktop -->
+      <div class="hidden md:flex items-center gap-4">
+        <StartMockButton v-if="questionStore.questions.length === 0" />
 
-      <!-- Start New Mock Button -->
-      <StartNewMockButton />
+        <!-- Questions List -->
+        <QuestionsList />
+
+        <!-- Start New Mock Button -->
+        <RestartMockButton />
+      </div>
 
       <!-- Timer -->
       <div class="pr-4">
-        <Timer />
+        <Timer :is-scrolled="isScrolled" />
       </div>
     </div>
   </header>
+
+  <!-- Mobile secondary header-->
+  <div
+    :class="[
+      'sticky top-[3.5rem] z-1 md:hidden flex justify-between items-center gap-4 px-4 w-screen bg-blue-950 transition-all duration-300 ease-in-out',
+      isScrolled ? 'h-[2rem]' : 'h-[3.5rem]'
+    ]"
+  >
+    <StartMockButton
+      v-if="questionStore.questions.length === 0"
+      :is-scrolled="isScrolled"
+      button-text="Start New Mock"
+      :full-width="true"
+    />
+
+    <div
+      v-if="questionStore.questions.length > 0"
+      class="flex items-center gap-4"
+    >
+      <QuestionsList :is-scrolled="isScrolled" />
+      <RestartMockButton :is-scrolled="isScrolled" button-text="New Mock" />
+    </div>
+  </div>
 </template>
