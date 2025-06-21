@@ -3,7 +3,7 @@
 const express = require("express");
 const router = express.Router();
 
-router.get("/status", async (req, res) => {
+router.get("/status", (req, res) => {
   return res.json("SUCCESS");
 });
 

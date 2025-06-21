@@ -7,7 +7,7 @@ const {
 } = require("../services/questions");
 
 module.exports = {
-  async getQuestions(req, res, next) {
+  async getQuestions(req, res) {
     try {
       const { secretCode } = req.body;
 
@@ -25,6 +25,7 @@ module.exports = {
       const difficulty = req.body.difficulty || ["Medium"];
       const topics = req.body.topics || [];
 
+      // Use this for testing
       // return res.json([
       //   {
       //     name: "Maximum Depth of Binary Tree",

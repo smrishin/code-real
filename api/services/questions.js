@@ -11,30 +11,24 @@ const {
 
 const validateInput = (payload) => {
   if (
-    !payload.noOfQuestions ||
-    !payload.difficulty ||
-    !payload.topics ||
-    !payload.company
+    payload.noOfQuestions &&
+    (payload.noOfQuestions < 1 || payload.noOfQuestions > MAX_QUESTIONS)
   ) {
-    throw new Error("Missing required fields");
-  }
-
-  if (payload.noOfQuestions < 1 || payload.noOfQuestions > MAX_QUESTIONS) {
-    throw new Error(
-      `Number of questions must be between 1 and ${MAX_QUESTIONS}`
-    );
+    throw new Error(`noOfQuestions must be between 1 and ${MAX_QUESTIONS}`);
   }
 
   if (
-    payload.difficulty.length > 3 ||
-    !payload.difficulty.every((d) => DIFFICULTY.includes(d))
+    payload.difficulty &&
+    (payload.difficulty.length > 3 ||
+      !payload.difficulty.every((d) => DIFFICULTY.includes(d)))
   ) {
     throw new Error(`Difficulty must be one of ${DIFFICULTY.join(", ")}`);
   }
 
   if (
-    payload.topics.length > TOPICS.length ||
-    !payload.topics.every((t) => TOPICS.includes(t))
+    payload.topics &&
+    (payload.topics.length > TOPICS.length ||
+      !payload.topics.every((t) => TOPICS.includes(t)))
   ) {
     throw new Error(`Topics must be one of ${TOPICS.join(", ")}`);
   }
@@ -45,38 +39,28 @@ const validateInput = (payload) => {
 };
 
 const getQuestionsRandom = async (noOfQuestions, difficulty, topics) => {
-  try {
-    const filteredQuestions = require("../data/questions.json").filter(
-      (q) =>
-        (difficulty && difficulty.length > 0
-          ? difficulty.includes(q.difficulty)
-          : true) &&
-        (topics && topics.length > 0 ? topics.includes(q.topic) : true)
-    );
+  const filteredQuestions = require("../data/questions.json").filter(
+    (q) =>
+      (difficulty && difficulty.length > 0
+        ? difficulty.includes(q.difficulty)
+        : true) &&
+      (topics && topics.length > 0 ? topics.includes(q.topic) : true)
+  );
 
-    const shuffled = filteredQuestions.sort(() => 0.5 - Math.random());
-    return shuffled.slice(0, noOfQuestions);
-  } catch (err) {
-    throw new Error(err);
-  }
+  const shuffled = filteredQuestions.sort(() => 0.5 - Math.random());
+  return shuffled.slice(0, noOfQuestions);
 };
 
 const createQuestionsWithAI = async (selectedQuestion, companyName) => {
-  try {
-    let questionInfo = "";
+  const questionInfo = Object.entries(selectedQuestion)
+    .map(([key, value]) => `\n\t${key}: ${value}`)
+    .join("");
 
-    for (const [key, value] of Object.entries(selectedQuestion)) {
-      questionInfo += `\n\t${key}: ${value}`;
-    }
+  const prompt = QUESTION_PROMPT_TO_AI(companyName, questionInfo);
 
-    const prompt = QUESTION_PROMPT_TO_AI(companyName, questionInfo);
+  const response = await gemini.generateContent(prompt);
 
-    const response = await gemini.generateContent(prompt);
-
-    return response.text;
-  } catch (err) {
-    throw new Error(err);
-  }
+  return response.text;
 };
 
 module.exports = {

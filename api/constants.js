@@ -2,7 +2,9 @@
 
 const MAX_QUESTIONS = 3;
 const DIFFICULTY = ["Easy", "Medium", "Hard"];
-const TOPICS = require("./data/questions.json").map((q) => q.topic);
+const TOPICS = [
+  ...new Set(require("./data/questions.json").map((q) => q.topic))
+];
 const COMPANIES = [
   "Google",
   "Microsoft",
