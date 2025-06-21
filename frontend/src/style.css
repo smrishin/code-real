@@ -5,8 +5,7 @@
   line-height: 1.5;
   font-weight: 400;
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
+  color: #e5e5e5;
   background-color: #242424;
 
   font-synthesis: none;
@@ -15,12 +14,55 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* Override any system preference-based dark mode */
+@media (prefers-color-scheme: light) {
+  :root {
+    color: #e5e5e5 !important;
+    background-color: #242424 !important;
+  }
+
+  body {
+    color: #e5e5e5 !important;
+    background-color: #242424 !important;
+  }
+}
+
 body {
   margin: 0;
   display: flex;
-  /* place-items: center; */
   min-width: 320px;
   min-height: 100vh;
+  color: #e5e5e5;
+  background-color: #242424;
+}
+
+/* scrollbar styling */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #1f2937;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #374151;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #4b5563;
+}
+
+::-webkit-scrollbar-corner {
+  background: #1f2937;
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #374151 #1f2937;
+  scrollbar-gutter: auto;
 }
 
 button {
@@ -79,17 +121,4 @@ strong::after {
   /* margin: auto; */
   /* padding: 2rem; */
   /* text-align: center; */
-}
-
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
 }

@@ -33,3 +33,4 @@ scripts/.env*
 scripts/dist/
 scripts/build/
 scr
+.vercel
