@@ -1,4 +1,5 @@
 <script setup>
+import { ref, onMounted, onUnmounted } from "vue";
 import { XMarkIcon, PlusIcon } from "@heroicons/vue/24/outline";
 
 import Modal from "@components/common/Modal.vue";
@@ -12,15 +13,27 @@ const questionStore = useQuestionStore();
 const modalStore = useModalStore();
 
 defineProps({
-  isScrolled: {
-    type: Boolean,
-    default: false
-  },
   buttonText: {
     type: String,
     default: "New Mock"
   }
 });
+
+const buttonHeight = ref("40px");
+
+const updateButtonStyle = () => {
+  if (window.innerWidth < 768) {
+    const scrollY = window.scrollY;
+    const maxScroll = 50;
+    const scrollProgress = Math.min(scrollY / maxScroll, 1);
+    const heightDiff = 16; // Difference between 40px and 24px
+    const currentHeight = 40 - scrollProgress * heightDiff;
+
+    buttonHeight.value = `${currentHeight}px`;
+  } else {
+    buttonHeight.value = "40px";
+  }
+};
 
 const onRestartMockClick = () => {
   modalStore.openConfirmRestart();
@@ -31,6 +44,17 @@ const restartMock = () => {
   timerStore.resetTimer();
   modalStore.closeAllModals();
 };
+
+onMounted(() => {
+  updateButtonStyle();
+  window.addEventListener("scroll", updateButtonStyle);
+  window.addEventListener("resize", updateButtonStyle);
+});
+
+onUnmounted(() => {
+  window.removeEventListener("scroll", updateButtonStyle);
+  window.removeEventListener("resize", updateButtonStyle);
+});
 </script>
 
 <template>
@@ -72,9 +96,9 @@ const restartMock = () => {
   <!-- Restart Mock Button -->
   <div v-if="questionStore.questions.length > 0">
     <button
+      :style="{ height: buttonHeight }"
       :class="[
-        'flex items-center gap-2 text-center text-xs md:text-sm font-semibold capitalize px-2 md:px-4 rounded-lg text-white bg-blue-800 hover:bg-blue-700 transition-colors',
-        isScrolled ? 'h-6' : 'h-10'
+        'flex items-center gap-2 text-center text-xs md:text-sm font-semibold capitalize px-4 rounded-lg text-white bg-blue-800 hover:bg-blue-700 transition-all duration-200 ease-out'
       ]"
       @click="onRestartMockClick"
       :disabled="questionStore.questions.length === 0"

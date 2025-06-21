@@ -1,5 +1,5 @@
 <script setup>
-import { ref, watch, computed } from "vue";
+import { ref, watch, onMounted, onUnmounted } from "vue";
 import {
   ClockIcon,
   EyeSlashIcon,
@@ -18,18 +18,24 @@ import { useModalStore } from "@stores/modal";
 const timerStore = useTimerStore();
 const modalStore = useModalStore();
 
-const props = defineProps({
-  isScrolled: {
-    type: Boolean,
-    default: false
-  }
-});
 const viewTimer = ref(true);
 const showTimeUpToast = ref(false);
 
-const timeUpToastPosition = computed(() => {
-  return props.isScrolled ? "top-24 md:top-16" : "top-32 md:top-16";
-});
+const toastTop = ref("top-32");
+
+const updateToastPosition = () => {
+  if (window.innerWidth < 768) {
+    const scrollY = window.scrollY;
+    const maxScroll = 50;
+    const scrollProgress = Math.min(scrollY / maxScroll, 1);
+    const topDiff = 32; // Difference between top-32 (128px) and top-24 (96px)
+    const currentTop = 128 - scrollProgress * topDiff;
+
+    toastTop.value = `${currentTop}px`;
+  } else {
+    toastTop.value = "top-16";
+  }
+};
 
 watch(
   () => timerStore.isTimeUp,
@@ -43,6 +49,17 @@ watch(
     }
   }
 );
+
+onMounted(() => {
+  updateToastPosition();
+  window.addEventListener("scroll", updateToastPosition);
+  window.addEventListener("resize", updateToastPosition);
+});
+
+onUnmounted(() => {
+  window.removeEventListener("scroll", updateToastPosition);
+  window.removeEventListener("resize", updateToastPosition);
+});
 </script>
 
 <template>
@@ -57,8 +74,8 @@ watch(
   >
     <div
       v-if="showTimeUpToast"
-      class="fixed z-50 right-4 flex items-center gap-2 px-4 py-2 bg-red-600 bg-opacity-50 text-white rounded-lg whitespace-nowrap shadow-xl font-semibold text-sm animate-bounce transition-all duration-300 ease-in-out"
-      :class="[timeUpToastPosition]"
+      :style="{ top: toastTop }"
+      class="fixed md:top-16 z-50 right-4 flex items-center gap-2 px-4 py-2 bg-red-600 bg-opacity-50 text-white rounded-lg whitespace-nowrap shadow-xl font-semibold text-sm animate-bounce transition-all duration-200 ease-out"
     >
       <ClockIcon class="w-5 h-5" />
       Time's Up!

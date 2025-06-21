@@ -1,5 +1,5 @@
 <script setup>
-import { ref, watch } from "vue";
+import { ref, watch, onMounted, onUnmounted } from "vue";
 import DOMPurify from "dompurify";
 
 import Loader from "@components/common/Loader.vue";
@@ -23,10 +23,6 @@ const isSettingsError = ref(false);
 const showTryAgainButton = ref(false);
 
 const props = defineProps({
-  isScrolled: {
-    type: Boolean,
-    default: false
-  },
   buttonText: {
     type: String,
     default: "Start Mock"
@@ -36,6 +32,28 @@ const props = defineProps({
     default: false
   }
 });
+
+const buttonHeight = ref("40px");
+const buttonMargin = ref("0px");
+
+const updateButtonStyle = () => {
+  if (window.innerWidth < 768) {
+    const scrollY = window.scrollY;
+    const maxScroll = 50;
+    const scrollProgress = Math.min(scrollY / maxScroll, 1);
+    const heightDiff = 16; // Difference between 40px and 24px
+    const currentHeight = 40 - scrollProgress * heightDiff;
+
+    buttonHeight.value = `${currentHeight}px`;
+
+    const maxMargin = 80;
+    const currentMargin = scrollProgress * maxMargin;
+    buttonMargin.value = `${currentMargin}px`;
+  } else {
+    buttonHeight.value = "40px";
+    buttonMargin.value = "0px";
+  }
+};
 
 const validateSettings = () => {
   const errors = [];
@@ -138,6 +156,17 @@ watch(
     }
   }
 );
+
+onMounted(() => {
+  updateButtonStyle();
+  window.addEventListener("scroll", updateButtonStyle);
+  window.addEventListener("resize", updateButtonStyle);
+});
+
+onUnmounted(() => {
+  window.removeEventListener("scroll", updateButtonStyle);
+  window.removeEventListener("resize", updateButtonStyle);
+});
 </script>
 
 <template>
@@ -173,9 +202,13 @@ watch(
     :class="{ 'w-full': fullWidth }"
   >
     <button
+      :style="{
+        height: buttonHeight,
+        marginLeft: buttonMargin,
+        marginRight: buttonMargin
+      }"
       :class="[
-        'flex justify-center items-center gap-2 text-center text-xs md:text-base font-semibold capitalize px-2 md:px-4 rounded-lg text-white bg-blue-800 hover:bg-blue-700 transition-all duration-300 ease-in-out',
-        isScrolled ? 'h-6 mx-20' : 'h-10',
+        'flex justify-center items-center gap-2 text-center text-xs md:text-base font-semibold capitalize px-2 md:px-4 rounded-lg text-white bg-blue-800 hover:bg-blue-700 transition-all duration-200 ease-out',
         fullWidth ? 'w-full' : ''
       ]"
       @click="onStartMockClick"
