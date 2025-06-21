@@ -76,7 +76,7 @@ const handleLeetCodeClick = async () => {
     <!-- Run Button -->
     <button
       @click="handleLeetCodeClick"
-      class="flex items-center gap-2 px-3 py-1 text-amber-500 bg-transparent hover:bg-amber-500/10 backdrop-blur-sm backdrop-brightness-80 rounded-md"
+      class="flex items-center gap-2 px-3 py-1 text-amber-500 hover:bg-amber-500/10 backdrop-blur-sm backdrop-brightness-80 rounded-md"
     >
       <PlayIcon class="w-4 h-4" />
       Run

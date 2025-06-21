@@ -23,11 +23,6 @@ body {
   min-height: 100vh;
 }
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
-}
-
 button {
   cursor: pointer;
 }
@@ -35,10 +30,6 @@ button {
 button:disabled {
   opacity: 0.5;
   cursor: not-allowed;
-}
-
-.card {
-  padding: 2em;
 }
 
 h2 {
@@ -75,7 +66,7 @@ strong::after {
 
 .prose ul {
   list-style-type: disc;
-  padding-left: 1.5rem; /* or 2rem for more space */
+  padding-left: 1.5rem;
 }
 
 .prose ol {

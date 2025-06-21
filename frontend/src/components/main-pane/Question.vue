@@ -45,7 +45,7 @@ const props = defineProps({
       <div class="flex justify-start gap-2 py-2 px-4 pb-5">
         <button
           @click="openLink(question.leetcodeLink)"
-          class="flex items-center gap-1 px-3 py-1 text-sm font-medium text-amber-500 bg-transparent hover:bg-amber-500/10 rounded-md border border-amber-500/20"
+          class="flex items-center gap-1 px-3 py-1 text-sm font-medium text-amber-500 hover:bg-amber-500/10 rounded-md border border-amber-500/20"
         >
           <img
             :src="leetcodeLogo"
@@ -57,7 +57,7 @@ const props = defineProps({
         </button>
         <button
           @click="openLink(question.solutionLink)"
-          class="flex items-center gap-1 px-3 py-1 text-sm font-medium text-white bg-transparent hover:bg-white/10 rounded-md border border-white/20"
+          class="flex items-center gap-1 px-3 py-1 text-sm font-medium text-white hover:bg-white/10 rounded-md border border-white/20"
         >
           <img
             :src="neetcodeLogo"

@@ -65,7 +65,7 @@ const toggleSettings = () => {
         >{{ buttonText }}</span
       >
       <Cog6ToothIcon
-        class="w-6 h-6 text-white text-xl transition-transform duration-300"
+        class="w-6 h-6 text-white text-xl duration-300"
         :class="{ 'group-hover:rotate-90': !timerStore.isRunning }"
       />
     </button>

@@ -61,7 +61,7 @@ const props = defineProps({
             type="checkbox"
             :value="level"
             v-model="settingsStore.difficulty"
-            class="rounded border-gray-600 text-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-0 focus:rounded bg-gray-700"
+            class="rounded border-gray-600 text-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500 bg-gray-700"
           />
           <span class="ml-2 text-gray-100">{{ level }}</span>
         </label>
