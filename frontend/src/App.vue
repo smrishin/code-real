@@ -1,17 +1,18 @@
 <script setup>
-import CodeEditor from "./components/editor-pane/CodeEditor.vue";
-// import SideBarLeft from "./components/SideBarLeft.vue";
-import Landing from "./components/main-pane/Landing.vue";
-import Question from "./components/main-pane/Question.vue";
-import Header from "./components/header/Header.vue";
-import SettingsModal from "./components/settings/SettingsModal.vue";
-import ContactModal from "./components/contact/ContactModal.vue";
-import DesktopRecommendationModal from "./components/common/DesktopRecommendationModal.vue";
-
 import { onUnmounted, watch, computed, onMounted } from "vue";
-import { useTimerStore } from "./stores/timer";
-import { useQuestionStore } from "./stores/question";
-import { useModalStore } from "./stores/modal";
+import { isMobileDevice } from "@utils";
+
+import CodeEditor from "@components/editor-pane/CodeEditor.vue";
+import Landing from "@components/main-pane/Landing.vue";
+import Question from "@components/main-pane/Question.vue";
+import Header from "@components/header/Header.vue";
+import SettingsModal from "@components/settings/SettingsModal.vue";
+import ContactModal from "@components/contact/ContactModal.vue";
+import DesktopRecommendationModal from "@components/common/DesktopRecommendationModal.vue";
+
+import { useTimerStore } from "@stores/timer";
+import { useQuestionStore } from "@stores/question";
+import { useModalStore } from "@stores/modal";
 
 const timerStore = useTimerStore();
 const questionStore = useQuestionStore();
@@ -19,15 +20,6 @@ const modalStore = useModalStore();
 
 // Computed properties for current question
 const currentQuestion = computed(() => questionStore.getCurrentQuestion());
-
-// Mobile detection function
-const isMobileDevice = () => {
-  return (
-    /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
-      navigator.userAgent
-    ) || window.innerWidth <= 768
-  );
-};
 
 // Check if user has already dismissed the modal
 const hasUserDismissedModal = () => {
@@ -82,9 +74,6 @@ watch(
   <div
     class="flex flex-col md:flex-row w-screen md:h-[calc(100vh-3.5rem)] overflow-hidden"
   >
-    <!-- Left sidebar -->
-    <!-- <SideBarLeft /> -->
-
     <!-- Question Pane -->
     <div class="w-full md:w-1/2 overflow-auto md:border-r md:border-gray-700">
       <Landing v-if="!currentQuestion" />

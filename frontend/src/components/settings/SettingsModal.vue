@@ -2,11 +2,11 @@
 import { ref, computed, watch } from "vue";
 import { ExclamationTriangleIcon } from "@heroicons/vue/24/outline";
 
-import { useModalStore } from "../../stores/modal";
-import { useSettingsStore } from "../../stores/settings";
+import Modal from "@components/common/Modal.vue";
+import Settings from "@components/settings/Settings.vue";
 
-import Modal from "../common/Modal.vue";
-import Settings from "./Settings.vue";
+import { useModalStore } from "@stores/modal";
+import { useSettingsStore } from "@stores/settings";
 
 const modalStore = useModalStore();
 const settingsStore = useSettingsStore();
@@ -18,6 +18,14 @@ const isError = computed(() => {
     settingsStore.difficulty.length === 0 || settingsStore.topics.length === 0
   );
 });
+
+const closeModal = () => {
+  if (isError.value) {
+    showError.value = true;
+    return;
+  }
+  modalStore.closeSettings();
+};
 
 watch(
   () => settingsStore.difficulty,
@@ -32,14 +40,6 @@ watch(
     showError.value = false;
   }
 );
-
-const closeModal = () => {
-  if (isError.value) {
-    showError.value = true;
-    return;
-  }
-  modalStore.closeSettings();
-};
 </script>
 
 <template>

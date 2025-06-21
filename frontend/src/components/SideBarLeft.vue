@@ -1,9 +1,10 @@
 <!-- DEPRECATED -->
 
 <script setup>
-import SettingsButton from "./SettingsButton.vue";
-import ContactButton from "./ContactButton.vue";
-import { useQuestionStore } from "../stores/question";
+import SettingsButton from "@components/settings/SettingsButton.vue";
+import ContactButton from "@components/contact/ContactButton.vue";
+
+import { useQuestionStore } from "@stores/question";
 
 const questionStore = useQuestionStore();
 </script>

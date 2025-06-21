@@ -2,22 +2,22 @@
 import { ref, watch } from "vue";
 import DOMPurify from "dompurify";
 
-import Loader from "../common/Loader.vue";
-import ErrorModal from "../common/ErrorModal.vue";
-import SettingsButton from "../settings/SettingsButton.vue";
-import PromptSecretCode from "./PromptSecretCode.vue";
+import Loader from "@components/common/Loader.vue";
+import ErrorModal from "@components/common/ErrorModal.vue";
+import SettingsButton from "@components/settings/SettingsButton.vue";
+import PromptSecretCode from "@components/header/PromptSecretCode.vue";
 
-import { useSettingsStore } from "../../stores/settings";
-import { useQuestionStore } from "../../stores/question";
-import { useTimerStore } from "../../stores/timer";
-import { useModalStore } from "../../stores/modal";
+import { useSettingsStore } from "@stores/settings";
+import { useQuestionStore } from "@stores/question";
+import { useTimerStore } from "@stores/timer";
+import { useModalStore } from "@stores/modal";
 
 const settingsStore = useSettingsStore();
 const questionStore = useQuestionStore();
 const timerStore = useTimerStore();
 const modalStore = useModalStore();
-const isLoading = ref(false);
 
+const isLoading = ref(false);
 const errorMessage = ref("");
 const isSettingsError = ref(false);
 const showTryAgainButton = ref(false);

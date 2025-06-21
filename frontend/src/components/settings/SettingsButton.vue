@@ -1,13 +1,13 @@
 <script setup>
-import { Cog6ToothIcon } from "@heroicons/vue/24/outline";
 import { computed } from "vue";
-import { scrollToElement } from "../../utils";
+import { Cog6ToothIcon } from "@heroicons/vue/24/outline";
+import { scrollToElement } from "@utils";
 
-import Tooltip from "../common/Tooltip.vue";
+import Tooltip from "@components/common/Tooltip.vue";
 
-import { useTimerStore } from "../../stores/timer";
-import { useModalStore } from "../../stores/modal";
-import { useQuestionStore } from "../../stores/question";
+import { useTimerStore } from "@stores/timer";
+import { useModalStore } from "@stores/modal";
+import { useQuestionStore } from "@stores/question";
 
 const timerStore = useTimerStore();
 const questionStore = useQuestionStore();

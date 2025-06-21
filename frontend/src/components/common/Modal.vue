@@ -48,7 +48,13 @@ const handleEscape = (event) => {
   }
 };
 
-// Add and remove event listeners
+watch(
+  () => props.isOpen,
+  (val) => {
+    if (val) emit("open");
+  }
+);
+
 onMounted(() => {
   document.addEventListener("keydown", handleEscape);
 });
@@ -56,13 +62,6 @@ onMounted(() => {
 onUnmounted(() => {
   document.removeEventListener("keydown", handleEscape);
 });
-
-watch(
-  () => props.isOpen,
-  (val) => {
-    if (val) emit("open");
-  }
-);
 </script>
 
 <template>

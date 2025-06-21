@@ -1,6 +1,8 @@
 <script setup>
-import { openLink } from "../../utils";
 import { ArrowTopRightOnSquareIcon } from "@heroicons/vue/24/outline";
+import leetcodeLogo from "@logos/leetcode.png";
+import neetcodeLogo from "@logos/neetcode.jpg";
+import { openLink } from "@utils";
 
 const props = defineProps({
   question: {
@@ -46,7 +48,7 @@ const props = defineProps({
           class="flex items-center gap-1 px-3 py-1 text-sm font-medium text-amber-500 bg-transparent hover:bg-amber-500/10 rounded-md border border-amber-500/20"
         >
           <img
-            src="../../assets/leetcode.png"
+            :src="leetcodeLogo"
             alt="LeetCode"
             class="w-4 h-4 rounded-full mr-1"
           />
@@ -58,7 +60,7 @@ const props = defineProps({
           class="flex items-center gap-1 px-3 py-1 text-sm font-medium text-white bg-transparent hover:bg-white/10 rounded-md border border-white/20"
         >
           <img
-            src="../../assets/neetcode.jpg"
+            :src="neetcodeLogo"
             alt="NeetCode"
             class="w-4 h-4 rounded-full mr-1"
           />

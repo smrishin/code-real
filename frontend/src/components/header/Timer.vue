@@ -9,11 +9,11 @@ import {
   XMarkIcon
 } from "@heroicons/vue/24/outline";
 
-import { useTimerStore } from "../../stores/timer";
-import { useModalStore } from "../../stores/modal";
+import Modal from "@components/common/Modal.vue";
+import RestartMockButton from "@components/header/RestartMockButton.vue";
 
-import Modal from "../common/Modal.vue";
-import RestartMockButton from "./RestartMockButton.vue";
+import { useTimerStore } from "@stores/timer";
+import { useModalStore } from "@stores/modal";
 
 const timerStore = useTimerStore();
 const modalStore = useModalStore();
@@ -24,13 +24,12 @@ const props = defineProps({
     default: false
   }
 });
+const viewTimer = ref(true);
+const showTimeUpToast = ref(false);
 
 const timeUpToastPosition = computed(() => {
   return props.isScrolled ? "top-24 md:top-16" : "top-32 md:top-16";
 });
-
-const viewTimer = ref(true);
-const showTimeUpToast = ref(false);
 
 watch(
   () => timerStore.isTimeUp,

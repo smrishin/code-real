@@ -1,4 +1,6 @@
 .vercel/
+.env*.local
+
 # Global ignores
 .DS_Store
 Thumbs.db
@@ -31,5 +33,3 @@ scripts/.env*
 scripts/dist/
 scripts/build/
 scr
-.vercel
-.env*.local

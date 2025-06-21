@@ -1,5 +1,5 @@
 <script setup>
-import { useQuestionStore } from "../../stores/question";
+import { useQuestionStore } from "@stores/question";
 
 const questionStore = useQuestionStore();
 

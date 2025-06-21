@@ -5,9 +5,9 @@ import {
   BriefcaseIcon
 } from "@heroicons/vue/24/outline";
 
-import { useModalStore } from "../../stores/modal";
+import Modal from "@components/common/Modal.vue";
 
-import Modal from "../common/Modal.vue";
+import { useModalStore } from "@stores/modal";
 
 const modalStore = useModalStore();
 

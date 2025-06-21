@@ -1,14 +1,15 @@
 <script setup>
-import { CodeBracketIcon } from "@heroicons/vue/24/outline";
 import { ref, onMounted, onUnmounted } from "vue";
+import { CodeBracketIcon } from "@heroicons/vue/24/outline";
 
-import Timer from "./Timer.vue";
-import SettingsButton from "../settings/SettingsButton.vue";
-import ContactButton from "../contact/ContactButton.vue";
-import RestartMockButton from "./RestartMockButton.vue";
-import StartMockButton from "./StartMockButton.vue";
-import QuestionsList from "./QuestionsList.vue";
-import { useQuestionStore } from "../../stores/question";
+import Timer from "@components/header/Timer.vue";
+import SettingsButton from "@components/settings/SettingsButton.vue";
+import ContactButton from "@components/contact/ContactButton.vue";
+import RestartMockButton from "@components/header/RestartMockButton.vue";
+import StartMockButton from "@components/header/StartMockButton.vue";
+import QuestionsList from "@components/header/QuestionsList.vue";
+
+import { useQuestionStore } from "@stores/question";
 
 const questionStore = useQuestionStore();
 

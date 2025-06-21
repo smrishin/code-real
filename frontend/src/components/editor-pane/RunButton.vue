@@ -1,7 +1,8 @@
 <script setup>
-import { PlayIcon, ClipboardDocumentIcon } from "@heroicons/vue/24/outline";
 import { ref } from "vue";
-import { openLink } from "../../utils";
+import { PlayIcon, ClipboardDocumentIcon } from "@heroicons/vue/24/outline";
+import leetcodeLogo from "@logos/leetcode.png";
+import { openLink } from "@utils";
 
 const props = defineProps({
   leetcodeLink: {
@@ -80,7 +81,7 @@ const handleLeetCodeClick = async () => {
       <PlayIcon class="w-4 h-4" />
       Run
       <img
-        src="../../assets/leetcode.png"
+        :src="leetcodeLogo"
         alt="LeetCode"
         class="w-4 h-4 rounded-full mr-1"
       />

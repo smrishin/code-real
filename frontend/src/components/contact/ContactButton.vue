@@ -1,9 +1,9 @@
 <script setup>
 import { EnvelopeIcon } from "@heroicons/vue/24/outline";
 
-import { useModalStore } from "../../stores/modal";
+import { useModalStore } from "@stores/modal";
 
-import Tooltip from "../common/Tooltip.vue";
+import Tooltip from "@components/common/Tooltip.vue";
 
 const modalStore = useModalStore();
 

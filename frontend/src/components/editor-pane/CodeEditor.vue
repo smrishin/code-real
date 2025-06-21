@@ -1,8 +1,8 @@
 <script setup>
-import { ref, onMounted, computed, watch } from "vue";
+import { ref, computed, watch } from "vue";
 import { VueMonacoEditor } from "@guolao/vue-monaco-editor";
 
-import RunButton from "./RunButton.vue";
+import RunButton from "@components/editor-pane/RunButton.vue";
 
 const props = defineProps({
   initialCode: {
@@ -23,19 +23,6 @@ const emit = defineEmits(["update:value"]);
 
 const code = ref(props.initialCode);
 
-// Watch for code changes and emit updates
-watch(code, (newValue) => {
-  emit("update:value", newValue);
-});
-
-// Watch for initialCode prop changes
-watch(
-  () => props.initialCode,
-  (newValue) => {
-    code.value = newValue;
-  }
-);
-
 const options = computed(() => ({
   automaticLayout: true,
   minimap: { enabled: false },
@@ -53,10 +40,16 @@ const options = computed(() => ({
   }
 }));
 
-// Initial setup
-onMounted(() => {
-  code.value = props.initialCode;
+watch(code, (newValue) => {
+  emit("update:value", newValue);
 });
+
+watch(
+  () => props.initialCode,
+  (newValue) => {
+    code.value = newValue;
+  }
+);
 </script>
 
 <template>

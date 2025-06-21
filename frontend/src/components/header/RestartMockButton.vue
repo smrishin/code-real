@@ -1,11 +1,11 @@
 <script setup>
 import { XMarkIcon, PlusIcon } from "@heroicons/vue/24/outline";
 
-import { useQuestionStore } from "../../stores/question";
-import { useTimerStore } from "../../stores/timer";
-import { useModalStore } from "../../stores/modal";
+import Modal from "@components/common/Modal.vue";
 
-import Modal from "../common/Modal.vue";
+import { useQuestionStore } from "@stores/question";
+import { useTimerStore } from "@stores/timer";
+import { useModalStore } from "@stores/modal";
 
 const timerStore = useTimerStore();
 const questionStore = useQuestionStore();

@@ -1,7 +1,7 @@
 <script setup>
-import StartMockButton from "../header/StartMockButton.vue";
-import Settings from "../settings/Settings.vue";
-import SettingsButton from "../settings/SettingsButton.vue";
+import StartMockButton from "@components/header/StartMockButton.vue";
+import Settings from "@components/settings/Settings.vue";
+import SettingsButton from "@components/settings/SettingsButton.vue";
 </script>
 
 <template>

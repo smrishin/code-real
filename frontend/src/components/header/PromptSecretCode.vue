@@ -2,8 +2,9 @@
 import { ref, watch, nextTick } from "vue";
 import { XMarkIcon, EyeIcon, EyeSlashIcon } from "@heroicons/vue/24/outline";
 
-import Modal from "../common/Modal.vue";
-import { useModalStore } from "../../stores/modal";
+import Modal from "@components/common/Modal.vue";
+
+import { useModalStore } from "@stores/modal";
 
 const modalStore = useModalStore();
 

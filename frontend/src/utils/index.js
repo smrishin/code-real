@@ -9,4 +9,13 @@ const scrollToElement = (elementId) => {
   element.scrollIntoView({ behavior: "smooth", block: "start" });
 };
 
-export { openLink, scrollToElement };
+// Mobile detection function
+const isMobileDevice = () => {
+  return (
+    /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+      navigator.userAgent
+    ) || window.innerWidth <= 768
+  );
+};
+
+export { openLink, scrollToElement, isMobileDevice };

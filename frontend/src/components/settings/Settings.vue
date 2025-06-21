@@ -1,12 +1,15 @@
 <script setup>
-import { useSettingsStore } from "../../stores/settings";
-import { QUESTION_LIMIT, TIME_LIMITS } from "../../constants/settings";
 import {
   ChevronDownIcon,
   ExclamationTriangleIcon
 } from "@heroicons/vue/24/outline";
 
+import { useSettingsStore } from "@stores/settings";
+
+import { QUESTION_LIMIT, TIME_LIMITS } from "@constants/settings";
+
 const settingsStore = useSettingsStore();
+
 const props = defineProps({
   fieldClass: {
     type: String,
