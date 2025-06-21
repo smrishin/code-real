@@ -82,7 +82,7 @@ onUnmounted(() => {
       <StartMockButton
         v-if="questionStore.questions.length === 0"
         button-text="Start New Mock"
-        :full-width="true"
+        :for-mobile-header="true"
       />
 
       <div

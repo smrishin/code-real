@@ -27,7 +27,7 @@ const props = defineProps({
     type: String,
     default: "Start Mock"
   },
-  fullWidth: {
+  forMobileHeader: {
     type: Boolean,
     default: false
   }
@@ -37,7 +37,7 @@ const buttonHeight = ref("40px");
 const buttonMargin = ref("0px");
 
 const updateButtonStyle = () => {
-  if (window.innerWidth < 768) {
+  if (props.forMobileHeader && window.innerWidth < 768) {
     const scrollY = window.scrollY;
     const maxScroll = 50;
     const scrollProgress = Math.min(scrollY / maxScroll, 1);
@@ -199,7 +199,7 @@ onUnmounted(() => {
   <!-- Start Mock Button (outside modal) -->
   <div
     class="flex justify-center items-center"
-    :class="{ 'w-full': fullWidth }"
+    :class="{ 'w-full': forMobileHeader }"
   >
     <button
       :style="{
@@ -207,10 +207,8 @@ onUnmounted(() => {
         marginLeft: buttonMargin,
         marginRight: buttonMargin
       }"
-      :class="[
-        'flex justify-center items-center gap-2 text-center text-xs md:text-base font-semibold capitalize px-2 md:px-4 rounded-lg text-white bg-blue-800 hover:bg-blue-700 transition-all duration-200 ease-out',
-        fullWidth ? 'w-full' : ''
-      ]"
+      class="flex justify-center items-center gap-2 text-center text-xs md:text-base font-semibold capitalize px-4 rounded-lg text-white bg-blue-800 hover:bg-blue-700 transition-all duration-200 ease-out"
+      :class="{ 'w-full': forMobileHeader }"
       @click="onStartMockClick"
       :disabled="isLoading"
     >
