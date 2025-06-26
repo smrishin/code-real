@@ -3,6 +3,8 @@ import { ref } from "vue";
 import { PlayIcon, ClipboardDocumentIcon } from "@heroicons/vue/24/outline";
 import leetcodeLogo from "@logos/leetcode.png";
 import { openLink } from "@utils";
+import Tooltip from "@components/common/Tooltip.vue";
+import { QuestionMarkCircleIcon } from "@heroicons/vue/24/outline";
 
 const props = defineProps({
   leetcodeLink: {
@@ -16,6 +18,10 @@ const props = defineProps({
 });
 
 const showToast = ref(false);
+
+const tooltipTextHtml = `<p>This platform is a personal project and does not support in-browser code execution at this time.
+<br/><br/>
+You can copy the code and run it directly on <strong>LeetCode</strong> or in your local development environment.</p>`;
 
 const handleLeetCodeClick = async () => {
   try {
@@ -74,17 +80,22 @@ const handleLeetCodeClick = async () => {
     </div>
 
     <!-- Run Button -->
-    <button
-      @click="handleLeetCodeClick"
-      class="flex items-center gap-2 px-3 py-1 text-amber-500 hover:bg-amber-500/10 backdrop-blur-sm backdrop-brightness-80 rounded-md"
-    >
-      <PlayIcon class="w-4 h-4" />
-      Run
-      <img
-        :src="leetcodeLogo"
-        alt="LeetCode"
-        class="w-4 h-4 rounded-full mr-1"
-      />
-    </button>
+    <div class="flex items-center gap-2">
+      <Tooltip :text-html="tooltipTextHtml" placement="top-left">
+        <QuestionMarkCircleIcon class="w-4 h-4" />
+      </Tooltip>
+      <button
+        @click="handleLeetCodeClick"
+        class="flex items-center gap-2 px-3 py-1 text-amber-500 hover:bg-amber-500/10 backdrop-blur-sm backdrop-brightness-80 rounded-md"
+      >
+        <PlayIcon class="w-4 h-4" />
+        Run on LeetCode
+        <img
+          :src="leetcodeLogo"
+          alt="LeetCode"
+          class="w-4 h-4 rounded-full mr-1"
+        />
+      </button>
+    </div>
   </div>
 </template>

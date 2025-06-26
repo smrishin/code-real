@@ -3,6 +3,7 @@ import { ref } from "vue";
 
 const props = defineProps({
   text: { type: String, required: true },
+  textHtml: { type: String, default: "" },
   placement: { type: String, default: "top" },
   disabled: { type: Boolean, default: false }
 });
@@ -43,15 +44,25 @@ const placements = {
       leave-from-class="transform scale-100 opacity-100"
       leave-to-class="transform scale-95 opacity-0"
     >
-      <span
-        v-if="show"
-        :class="[
-          'absolute z-50 bg-gray-900 text-white text-xs rounded px-2 py-1 shadow whitespace-nowrap pointer-events-none',
-          placements[props.placement] || placements.top
-        ]"
-      >
-        {{ text }}
-      </span>
+      <div v-if="show">
+        <div
+          v-if="textHtml"
+          :class="[
+            'absolute z-50 bg-gray-900 text-white text-xs rounded px-2 py-1 shadow whitespace-nowrap pointer-events-none',
+            placements[props.placement] || placements.top
+          ]"
+          v-html="textHtml"
+        ></div>
+        <span
+          v-else
+          :class="[
+            'absolute z-50 bg-gray-900 text-white text-xs rounded px-2 py-1 shadow whitespace-nowrap pointer-events-none',
+            placements[props.placement] || placements.top
+          ]"
+        >
+          {{ text }}
+        </span>
+      </div>
     </Transition>
   </div>
 </template>

@@ -6,10 +6,14 @@ import SettingsButton from "@components/settings/SettingsButton.vue";
 
 <template>
   <div
-    class="max-w-none flex flex-col gap-10 px-6 py-8 md:px-12 md:py-14 mx-4 my-6 md:mx-8 bg-[#272727] border-2 border-[#373737] rounded-lg"
+    class="max-w-none flex flex-col gap-4 px-6 py-8 md:px-12 md:py-14 mx-4 my-6 md:mx-8 bg-[#272727] border-2 border-[#373737] rounded-lg"
   >
+    <h1 class="text-2xl font-bold text-blue-600 text-center">
+      CodeReal: Mock Coding Interviews
+    </h1>
+
     <div class="flex flex-col gap-4 text-gray-400">
-      <h2 class="text-2xl font-bold text-blue-600 text-center">What is it?</h2>
+      <h2 class="text-xl font-bold text-red-600 text-center">What is it?</h2>
       <p class="text-md">
         This is a mock coding interview tool, built by a developer who got tired
         of solving algorithm problems that felt more like math puzzles than
@@ -23,9 +27,7 @@ import SettingsButton from "@components/settings/SettingsButton.vue";
     </div>
 
     <div class="flex flex-col gap-4 text-gray-400">
-      <h2 class="text-2xl font-bold text-amber-500 text-center">
-        How it works
-      </h2>
+      <h2 class="text-xl font-bold text-amber-500 text-center">How it works</h2>
       <ul class="list-disc list-inside text-md">
         <li>
           Hit Start Mock — you get a company-style question and the timer starts

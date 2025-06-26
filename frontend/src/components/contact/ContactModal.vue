@@ -20,7 +20,7 @@ const closeModal = () => {
   <Modal
     :is-open="modalStore.isContactOpen"
     title="Contact"
-    width="w-96"
+    width="w-120"
     max-height="max-h-[90vh]"
     @close="closeModal"
   >
@@ -31,6 +31,15 @@ const closeModal = () => {
     </template>
 
     <div class="flex flex-col gap-4 py-4">
+      <p class="text-gray-400">
+        I'm always looking for new opportunities, so feel free to reach out!
+      </p>
+
+      <p class="text-gray-400">
+        This is a side project I built in my free time. I'm a software engineer
+        with a passion for building products that help people live better lives.
+      </p>
+
       <!-- Email Button -->
       <a
         href="mailto:smrishin@gmail.com"
