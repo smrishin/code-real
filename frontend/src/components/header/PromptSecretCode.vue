@@ -95,7 +95,17 @@ watch(
         </div>
         <p class="text-gray-400 text-sm">
           <span class="font-bold">Note:</span> This is a secret code to prevent
-          unauthorized access.
+          unauthorized access. Reach out to me on email or LinkedIn
+          <button
+            @click="
+              modalStore.closePromptSecretCode();
+              modalStore.openContact();
+            "
+            class="text-blue-400 hover:text-blue-300 underline cursor-pointer"
+          >
+            here
+          </button>
+          if you need the secret code.
         </p>
       </form>
     </div>

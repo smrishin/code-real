@@ -4,9 +4,15 @@
   "description": "CodeReal: Interview style company based questions in a timed exam setup",
   "main": "index.js",
   "scripts": {
+    "dev": "concurrently --names \"FRONTEND,BACKEND\" --prefix-colors \"blue,green\" \"npm run dev:frontend\" \"npm run dev:backend\"",
+    "dev:frontend": "cd frontend && npm run dev",
+    "dev:backend": "cd api && npm run dev",
     "build": "cd frontend && npm install && npm run build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
 }
