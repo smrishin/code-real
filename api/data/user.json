@@ -1,0 +1,14 @@
+[
+  {
+    "id": 1,
+    "email": "smrishin@gmaaisl.com",
+    "name": "Hrishikesh",
+    "password": "$2b$10$cqvf3c5bMCGLrkuuGOJNU.dNXYuiSEq7velg3HOPpZjLlPP9vU2xW"
+  },
+  {
+    "id": 2,
+    "email": "smrishin@gmail.com",
+    "name": "Hrishikesh",
+    "password": "$2b$10$DLTy36U3/Du7FPdPNFoN.ejF9PqDmKUweSKAqPtbI7cPsijM0iYnG"
+  }
+]
