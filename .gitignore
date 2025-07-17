@@ -13,6 +13,8 @@ yarn-debug.log*
 yarn-error.log*
 .pnpm-store/
 
+node_modules/
+
 # API (Node.js + Express)
 api/node_modules/
 api/.env*
