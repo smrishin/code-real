@@ -97,6 +97,7 @@ watch(
           <span class="font-bold">Note:</span> This is a secret code to prevent
           unauthorized access. Reach out to me on email or LinkedIn
           <button
+            type="button"
             @click="
               modalStore.closePromptSecretCode();
               modalStore.openContact();
