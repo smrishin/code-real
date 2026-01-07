@@ -46,7 +46,9 @@ module.exports = {
         topics
       );
 
-      await Promise.allSettled(
+      // if fetching 1 question fails, then return an error
+      // const results = await Promise.allSettled(
+      await Promise.all(
         selectedQuestions.map(async (q) => {
           const rawHTML = await createQuestionsWithAI(q, companyName);
 
@@ -65,11 +67,17 @@ module.exports = {
         })
       );
 
+      // results.map((e) => {
+      //   if (e.status === "rejected") {
+      //     throw Error(e.reason);
+      //   }
+      // });
+
       return res.json(selectedQuestions);
     } catch (err) {
       console.error(`Error getting the questions: ${err}`);
       return res.status(400).json({
-        error: err.message || "Failed to get questions"
+        error: "Failed to get questions. Please reach out to the admin"
       });
     }
   }

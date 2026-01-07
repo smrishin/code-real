@@ -57,8 +57,11 @@ const createQuestionsWithAI = async (selectedQuestion, companyName) => {
     .join("");
 
   const prompt = QUESTION_PROMPT_TO_AI(companyName, questionInfo);
-
   const response = await gemini.generateContent(prompt);
+
+  if (!response || !response?.text || response?.text.length === 0) {
+    throw Error("Error creating question with Gemini");
+  }
 
   return response.text;
 };
